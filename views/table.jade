@@ -1,0 +1,33 @@
+p
+  a(href="/") #{host}
+  |  /
+  a(href="/"+ database) #{database}
+  |  / #{table}
+
+table#fields
+  tr
+    th Field
+    th Type
+    th Null
+    th Key
+    th Default
+    th Extra
+
+  - fields.forEach(function(field){
+    - if(field.Key === 'PRI')
+      tr.primary
+        td.field= field.Field
+        td.type= field.Type
+        td.null= field.Null
+        td.key= field.Key
+        td.default= field.Default
+        td.extra= field.Extra
+    - else
+      tr
+        td.field= field.Field
+        td.type= field.Type
+        td.null= field.Null
+        td.key= field.Key
+        td.default= field.Default
+        td.extra= field.Extra
+  - })

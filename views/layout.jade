@@ -1,0 +1,23 @@
+!!! 5
+html(lang:"en")
+  head
+    title= title
+    link(rel:"stylesheet", href:"/stylesheets/style.css")
+    script(src:'/js/jquery.js')
+    script(src:'/js/global.js')
+  body
+    #header
+      h1 node-myadmin
+      ul.menu
+        li
+          a(href:'/') home
+        li
+          - if (database)
+            - if (table)
+              a(href:'/query/'+ database +'/'+ table) query
+            - else
+              a(href:'/query/'+ database) query
+          - else
+            a(href:'/query') query
+    #content!= body
+    #footer

@@ -1,0 +1,32 @@
+- if(err)
+  div.error
+    p.code= err.sqlState
+    p.message= err.message
+    pre.sql= err.sql
+    pre.stack= err.stack
+- else
+  - if(data.length)
+    table
+      tr
+        - for(var i in data[0]) {
+          th= i
+        - }
+
+      - data.forEach(function(result){
+        tr
+          - for(var i in result) {
+            - if (result[i] === null)
+              td.null NULL
+            - else
+              //- td= formatDate(result[i])
+              td= result[i]
+          - }
+      - })
+  - else
+    p Affected rows: #{data.affectedRows}
+
+    - if (data.insertId)
+      p Insert ID: #{data.insertId}
+
+    - if(data.message)
+      p Message: #{data.message}

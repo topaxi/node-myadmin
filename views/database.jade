@@ -1,0 +1,9 @@
+p
+  a(href="/") #{host}
+  |  / #{database}
+
+ul#tables
+  - tables.forEach(function(table){
+    li
+      a(href:"/"+ database +"/"+ table)= table
+  - })

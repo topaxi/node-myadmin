@@ -1,0 +1,10 @@
+p= host
+
+ul#databases
+  - databases.forEach(function(database){
+    li
+      a(href:"/"+ database)= database
+  - })
+
+//-:javascript
+//-  | alert('ohai')
