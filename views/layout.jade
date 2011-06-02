@@ -22,15 +22,16 @@ html(lang:"en")
 
       //- Breadcrumb
       p
-        a(href="/") home
+        a(href:"/") home
         - if (host)
           |  /
-          a(href="/"+ host) #{host}
+          a(href:"/"+ host)= host
         - if(host && database)
           |  /
-          a(href="/"+ host +"/" +database) #{database}
+          a(href:"/"+ host +"/" +database)= database
         - if(host && database && table)
-          |  / #{table}
+          |  /
+          a(href:"/"+ host +"/"+ database +"/"+ table)= table
 
     #content!= body
     #footer
