@@ -10,7 +10,7 @@ module.exports = function(app){
         , 'table':    undefined
       }
 
-    app.getDB(host).query('show databases', function(err, result){
+    app.utils.getDB(host).query('show databases', function(err, result){
       if(err) throw err
 
       locals.databases = []

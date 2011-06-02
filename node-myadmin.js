@@ -1,13 +1,12 @@
 #!/usr/bin/env node
 
-var app      = { 'path': __dirname, 'getDB': getDB }
+var app      = { 'path': __dirname }
   , express  = app.express  = require('express')
   , config   = app.config   = require(app.path +'/config/config')
   , stylus   = app.stylus   = require('stylus')
   , jade     = app.jade     = require('jade')
   , server   = app.server   = express.createServer()
   , utils    = app.utils    = require(app.path +'/lib/utils.js')
-  , DBServer = app.DBServer = {}
 ;
 
 server.configure('development', function(){
@@ -52,18 +51,4 @@ console.log('node-myadmin listening on port %d', server.address().port)
 
 function loadController(controller){
   return require(config.controller.path +'/'+ controller)(app)
-}
-
-function getDB(host) {
-  if (!(host in app.config.hosts)) {
-    throw new Error(
-      'jebús the host "'+ host +'" does not exist in my configuration!')
-  }
-
-  if (!(host in app.DBServer)) {
-    app.DBServer[host] = require(app.path +'/lib/db/DB')
-                                (app.config.hosts[host])
-  }
-
-  return app.DBServer[host]
 }

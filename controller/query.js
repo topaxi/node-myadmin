@@ -2,7 +2,7 @@ module.exports = function(app){
   app.server.get('/:host/query/:database?/:table?', function(req, res) {
     var host     = req.params.host
       , hosts    = app.config.hosts
-      , db       = app.getDB(host)
+      , db       = app.utils.getDB(host)
       , database = req.params.database
       , locals = {
           'title':   'node-myadmin:'+ host +'/query'
@@ -31,7 +31,7 @@ module.exports = function(app){
 
   app.server.post('/:host/query', function(req, res) {
     var parameters = JSON.parse('['+ req.body.parameters.trim() +']')
-      , db         = app.getDB(req.params.host)
+      , db         = app.utils.getDB(req.params.host)
 
     db.database = req.body.database
     app.utils.useDatabase(db, function(err) {

@@ -3,7 +3,7 @@ var utils = require('../lib/utils.js')
 module.exports = function(app){
   app.server.get('/:host/:database/:table', function(req, res) {
     var host     = req.params.host
-      , db       = app.getDB(host)
+      , db       = app.utils.getDB(host)
       , table    = req.params.table
       , database = req.params.database
       , locals   = {
