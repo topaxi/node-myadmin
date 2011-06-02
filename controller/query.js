@@ -34,6 +34,8 @@ module.exports = function(app){
       }
       else {
         try {
+          if (req.body.query.indexOf('?') < 0) parameters = []
+
           // db.query is async, parameter errors can (and should) be catched!
           db.query(req.body.query, parameters, send)
         }
