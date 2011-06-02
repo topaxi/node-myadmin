@@ -7,7 +7,8 @@ html(lang:"en")
     script(src:'/js/global.js')
   body
     #header
-      h1 node-myadmin
+      h1
+        a(href:'/') node-myadmin
       ul.menu
         - if(host)
           li
