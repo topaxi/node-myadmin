@@ -53,7 +53,8 @@ function loadController(controller){
 
 function getDB(host) {
   if (!(host in app.config.hosts)) {
-    throw 'jebús the host "'+ host +'" does not exist in my configuration!'
+    throw new Error(
+      'jebús the host "'+ host +'" does not exist in my configuration!')
   }
 
   if (!(host in app.DBServer)) {
