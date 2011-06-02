@@ -11,12 +11,15 @@ html(lang:"en")
       ul.menu
         //- li
         //-   a(href:'/') home
-        - if (database)
+        - if(host)
           li
-            - if (table)
-              a(href:'/'+ host +'/query/'+ database +'/'+ table) query
+            - if (database)
+              - if (table)
+                a(href:'/'+ host +'/query/'+ database +'/'+ table) query
+              - else
+                a(href:'/'+ host +'/query/'+ database) query
             - else
-              a(href:'/'+ host +'/query/'+ database) query
+              a(href:'/'+ host +'/query') query
 
       //- Breadcrumb
       p
