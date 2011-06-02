@@ -1,3 +1,5 @@
+var utils = require('../lib/utils.js')
+
 module.exports = function(app){
   app.server.get('/:host/:database', function(req, res) {
     var host     = req.params.host
@@ -29,8 +31,9 @@ module.exports = function(app){
 }
 
 function showTables(db, callback) {
-  db.useDatabase(db.database, function(err) {
+  utils.useDatabase(db, function(err) {
     if(!err) db.query('show tables', callback)
+    else throw err
   })
 }
 

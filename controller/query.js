@@ -28,7 +28,8 @@ module.exports = function(app){
     var parameters = JSON.parse('['+ req.body.parameters.trim() +']')
       , db         = app.getDB(req.params.host)
 
-    db.useDatabase(req.body.database, function(err) {
+    db.database = req.body.database
+    app.utils.useDatabase(db, function(err) {
       if (err) {
         send(err, null)
       }

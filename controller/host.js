@@ -1,6 +1,7 @@
 module.exports = function(app){
   app.server.get('/:host', function(req, res){
-    var host = req.params.host
+    var host  = req.params.host
+      , hosts = app.config.hosts
       , locals = {
           'title':   'node-myadmin:'+ host
         , 'content': 'Databases:'
@@ -14,7 +15,11 @@ module.exports = function(app){
 
       locals.databases = []
       for(var row in result){
-        locals.databases.push(result[row].Database)
+        var database = result[row].Database
+
+        if(app.utils.validDB(hosts[host].host, database)){
+          locals.databases.push(database)
+        }
       }
 
       res.render('host', {'locals': locals})

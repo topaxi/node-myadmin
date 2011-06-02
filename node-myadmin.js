@@ -3,10 +3,10 @@
 var app      = { 'path': __dirname, 'getDB': getDB }
   , express  = app.express  = require('express')
   , config   = app.config   = require(app.path +'/config/config')
-  //, db       = app.db       = require(app.path +'/lib/db/DB')(config.db)
   , stylus   = app.stylus   = require('stylus')
   , jade     = app.jade     = require('jade')
   , server   = app.server   = express.createServer()
+  , utils    = app.utils    = require(app.path +'/lib/utils.js')
   , DBServer = app.DBServer =  {}
 ;
 
