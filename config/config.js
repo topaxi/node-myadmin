@@ -1,14 +1,14 @@
 var app_path = __dirname.replace('/config', '');
 
 module.exports = {
-  'server': {
+    'server': {
       'port':        8080
     , 'viewEngine': 'jade'
-  },
-  'controller': {
+  }
+  , 'controller': {
       'path': app_path + '/controller'
-  },
-  'db': {
+  }
+  , 'db': {
       'user':     'root'
     , 'password': '123qwe'
     , 'database': ''
