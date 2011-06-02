@@ -1,6 +1,7 @@
 module.exports = function(app){
   app.server.get('/:host/query/:database?/:table?', function(req, res) {
     var host     = req.params.host
+      , hosts    = app.config.hosts
       , db       = app.getDB(host)
       , database = req.params.database
       , locals = {
@@ -17,7 +18,11 @@ module.exports = function(app){
 
       locals.databases = []
       for(var row in result){
-        locals.databases.push(result[row].Database)
+        var database = result[row].Database
+
+        if(app.utils.validDB(hosts[host].host, database)){
+          locals.databases.push(database)
+        }
       }
 
       res.render('query', {'locals': locals})
