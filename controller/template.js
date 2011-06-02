@@ -25,7 +25,9 @@ function compile(str, options){
 
 // The following methods are copied and modified from jade.js
 function parse(str, options){
-  var filename = options.filename;
+  var filename = options.filename
+    , utils    = require('jade').utils
+
   try {
     // Parse
     var parser = new Parser(str, filename);
@@ -34,6 +36,20 @@ function parse(str, options){
     // Compile
     var compiler = new (options.compiler || Compiler)(parser.parse(), options)
     compiler.line = function() {} // do not add line numbers here
+    compiler.buffer = function(str, esc) {
+      var buf = this.buf
+
+      if (esc) str = utils.escape(str)
+
+      if (this.lastBufferedIndex == buf.length) {
+        buf.pop()
+        str = this.lastBufferedString + str
+      }
+
+      buf.push("buf.push('" + str + "');")
+      this.lastBufferedIndex = buf.length
+      this.lastBufferedString = str
+    }
     var js = compiler.compile();
 
     // Debug compiler
