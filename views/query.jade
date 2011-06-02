@@ -1,7 +1,7 @@
 p
   a(href="/") #{host}
 
-form#query(action:'/query', method:'post')
+form#query(action:'/'+ host +'/query', method:'post')
   div
     label Database: 
       select(name:'database')

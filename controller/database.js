@@ -1,15 +1,16 @@
 module.exports = function(app){
-  var db = app.db
-
-  app.server.get('/:database', function(req, res) {
-    db.database = req.params.database
-
-    var locals = {
-        'title':   'node-myadmin:'+ app.config.db.host +'/'+ db.database
-      , 'content': 'Tables of '+ db.database +':'
-      , 'host':     app.config.db.host
+  app.server.get('/:host/:database', function(req, res) {
+    var host     = req.params.host
+      , db       = app.getDB(host)
+      , database = req.params.database
+      , locals   = {
+        'title':   'node-myadmin:'+ host +'/'+ database
+      , 'content': 'Tables of '+ database +':'
+      , 'host':     host
       , 'table':    undefined
     }
+
+    db.database = database
 
     showTables(db, function(err, result) {
       if(err) throw err

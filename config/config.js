@@ -8,13 +8,24 @@ module.exports = {
   , 'controller': {
       'path': app_path + '/controller'
   }
-  , 'db': {
-      'user':     'root'
-    , 'password': '123qwe'
-    , 'database': ''
-    , 'host':     '192.168.56.251'
-    , 'port':     3306
-    , 'typeCast': true
-    , 'debug':    false
+  , 'hosts': {
+      'localhost': {
+        'user':     'root'
+      , 'password': '123qwe'
+      , 'databases': []
+      , 'host':     'localhost'
+      , 'port':     3306
+      , 'typeCast': true
+      , 'debug':    false
+    }
+    , 'dev.gameswelt': {
+        'user':     'root'
+      , 'password': '123qwe'
+      , 'databases': []
+      , 'host':     '192.168.56.251'
+      , 'port':     3306
+      , 'typeCast': true
+      , 'debug':    false
+    }
   }
 }

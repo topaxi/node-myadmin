@@ -1,15 +1,16 @@
 module.exports = function(app){
-  var db = app.db
-
-  app.server.get('/query/:database?/:table?', function(req, res) {
-    db.database = req.params.database
-
-    var locals = {
-          'title':   'node-myadmin:'+ app.config.db.host +'/query'
-        , 'host':     app.config.db.host
-        , 'database': db.database
+  app.server.get('/:host/query/:database?/:table?', function(req, res) {
+    var host     = req.params.host
+      , db       = app.getDB(host)
+      , database = req.params.database
+      , locals = {
+          'title':   'node-myadmin:'+ host +'/query'
+        , 'host':     host
+        , 'database': database
         , 'table':    req.params.table
       }
+
+    db.database = database
 
     db.query('show databases', function(err, result){
       if(err) throw err
@@ -23,8 +24,9 @@ module.exports = function(app){
     })
   })
 
-  app.server.post('/query', function(req, res) {
+  app.server.post('/:host/query', function(req, res) {
     var parameters = JSON.parse('['+ req.body.parameters.trim() +']')
+      , db         = app.getDB(req.params.host)
 
     db.useDatabase(req.body.database, function(err) {
       if (err) {

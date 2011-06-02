@@ -9,15 +9,28 @@ html(lang:"en")
     #header
       h1 node-myadmin
       ul.menu
-        li
-          a(href:'/') home
+        //- li
+        //-   a(href:'/') home
         li
           - if (database)
             - if (table)
-              a(href:'/query/'+ database +'/'+ table) query
+              a(href:'/'+ host +'/query/'+ database +'/'+ table) query
             - else
-              a(href:'/query/'+ database) query
+              a(href:'/'+ host +'/query/'+ database) query
           - else
-            a(href:'/query') query
+            a(href:'/'+ host +'/query') query
+
+      //- Breadcrumb
+      p
+        a(href="/") home
+        - if (host)
+          |  /
+          a(href="/"+ host) #{host}
+        - if(host && database)
+          |  /
+          a(href="/"+ host +"/" +database) #{database}
+        - if(host && database && table)
+          |  / #{table}
+
     #content!= body
     #footer

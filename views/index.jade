@@ -1,10 +1,7 @@
-p= host
+p Hosts:
 
-ul#databases
-  - databases.forEach(function(database){
+ul#hosts
+  - hosts.forEach(function(host){
     li
-      a(href:"/"+ database)= database
+      a(href:"/"+ host)= host
   - })
-
-//-:javascript
-//-  | alert('ohai')

@@ -21,7 +21,7 @@ $('#query').submit(function(e){
   e.preventDefault()
   hideTextarea()
 
-  $.post('/query', $(this).serialize(), function(data) {
+  $.post(this.action, $(this).serialize(), function(data) {
     getTPL('query-result', function(tpl) {
       $('#results').html(tpl(data))
     })
@@ -38,7 +38,7 @@ function hideTextarea() {
 
 ;(function() {
   var matches
-  if (matches = /^\/query\/(.*?)\/(.*?)$/.exec(location.pathname)) {
+  if (matches = /\/query\/(.*?)\/(.*?)$/.exec(location.pathname)) {
     var query = 'SELECT * FROM '+ matches[2] +' LIMIT 0, 10'
 
     $('textarea').val(query)
