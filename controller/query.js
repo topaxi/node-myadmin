@@ -39,7 +39,7 @@ module.exports = function(app){
           // db.query is async, parameter errors can (and should) be catched!
           db.query(req.body.query, parameters, send)
         }
-        catch(e) {
+        catch(err) {
           send(err, null)
         }
       }
