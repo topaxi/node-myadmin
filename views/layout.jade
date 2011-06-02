@@ -11,8 +11,8 @@ html(lang:"en")
       ul.menu
         //- li
         //-   a(href:'/') home
-        li
-          - if (database)
+        - if (database)
+          li
             - if (table)
               a(href:'/'+ host +'/query/'+ database +'/'+ table) query
             - else
