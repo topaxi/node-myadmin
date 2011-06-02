@@ -9,8 +9,6 @@ html(lang:"en")
     #header
       h1 node-myadmin
       ul.menu
-        //- li
-        //-   a(href:'/') home
         - if(host)
           li
             - if (database)
@@ -21,8 +19,7 @@ html(lang:"en")
             - else
               a(href:'/'+ host +'/query') query
 
-      //- Breadcrumb
-      p
+      p#breadcrumb
         a(href:"/") home
         - if (host)
           |  /

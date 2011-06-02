@@ -1,10 +1,10 @@
 module.exports = function(app){
   app.server.get('/:host', function(req, res){
-    var host  = req.params.host
-      , hosts = app.config.hosts
+    var host   = req.params.host
+      , hosts  = app.config.hosts
       , locals = {
-          'title':   'node-myadmin:'+ host
-        , 'content': 'Databases:'
+          'title':    'node-myadmin:'+ host
+        , 'content':  'Databases:'
         , 'host':     host
         , 'database': undefined
         , 'table':    undefined

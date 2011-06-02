@@ -7,22 +7,25 @@ var app      = { 'path': __dirname, 'getDB': getDB }
   , jade     = app.jade     = require('jade')
   , server   = app.server   = express.createServer()
   , utils    = app.utils    = require(app.path +'/lib/utils.js')
-  , DBServer = app.DBServer =  {}
+  , DBServer = app.DBServer = {}
 ;
 
 server.configure('development', function(){
   server.use(stylus.middleware({
-      'debug':   true
-    , 'src':     app.path +'/public'
+      'debug': true
+    , 'src':   app.path +'/public'
   }))
 
-  server.use(express.errorHandler({ 'dumpExceptions': true, 'showStack': true }))
+  server.use(express.errorHandler({
+      'dumpExceptions': true
+    , 'showStack':      true
+  }))
 })
 
 server.configure('production', function(){
   server.use(stylus.middleware({
-      'debug':   false
-    , 'src':     app.path +'/public'
+      'debug': false
+    , 'src':   app.path +'/public'
   }))
 
   server.use(express.errorHandler())

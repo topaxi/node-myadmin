@@ -8,8 +8,8 @@ module.exports = function(app){
       , locals   = {
         'title':   'node-myadmin:'+ host +'/'+ database
       , 'content': 'Tables of '+ database +':'
-      , 'host':     host
-      , 'table':    undefined
+      , 'host':    host
+      , 'table':   undefined
     }
 
     db.database = database
@@ -32,8 +32,9 @@ module.exports = function(app){
 
 function showTables(db, callback) {
   utils.useDatabase(db, function(err) {
-    if(!err) db.query('show tables', callback)
-    else throw err
+    if(err) throw err
+
+    db.query('show tables', callback)
   })
 }
 

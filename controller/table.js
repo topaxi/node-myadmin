@@ -27,7 +27,9 @@ module.exports = function(app){
 
 function describeTable(db, table, callback) {
   utils.useDatabase(db, function(err) {
-    if(!err) db.query('describe '+ table, callback)
+    if(err) throw err
+
+    db.query('describe '+ table, callback)
   })
 }
 
