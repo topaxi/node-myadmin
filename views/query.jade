@@ -1,25 +1,25 @@
-form#query(action:'/'+ host +'/query', method:'post')
+form#query(action='/'+ host +'/query', method='post')
   div
     label Database: 
-      select(name:'database')
+      select(name='database')
         - databases.forEach(function(db){
            - if (db === database)
-              option(value:db,selected)= db
+              option(value=db,selected)= db
            - else
-              option(value:db)= db
+              option(value=db)= db
         - })
       | 
-      a(id:'tableList', href:'/'+ database) Browse tables
+      a(id='tableList', href='/'+ database) Browse tables
 
   div
-    textarea(name:'query')
+    textarea(name='query')
     ul#savedQueries
       li Empty query
     label Query parameters: 
-      input(name:'parameters')
+      input(name='parameters')
   div
-    button.submit(type:'submit') Submit
-    button.save(type:'button') Save Query
+    button.submit(type='submit') Submit
+    button.save(type='button') Save Query
   #results
 
-script(src:'/js/query.js')
+script(src='/js/query.js')

@@ -1,36 +1,36 @@
 !!! 5
-html(lang:"en")
+html(lang="en")
   head
     title= title
-    link(rel:"stylesheet", href:"/stylesheets/style.css")
-    script(src:'/js/jquery.js')
-    script(src:'/js/global.js')
+    link(rel="stylesheet", href="/stylesheets/style.css")
+    script(src='/js/jquery.js')
+    script(src='/js/global.js')
   body
     #header
       h1
-        a(href:'/') node-myadmin
+        a(href='/') node-myadmin
       ul.menu
         - if(host)
           li
             - if (database)
               - if (table)
-                a(href:'/'+ host +'/query/'+ database +'/'+ table) query
+                a(href='/'+ host +'/query/'+ database +'/'+ table) query
               - else
-                a(href:'/'+ host +'/query/'+ database) query
+                a(href='/'+ host +'/query/'+ database) query
             - else
-              a(href:'/'+ host +'/query') query
+              a(href='/'+ host +'/query') query
 
       p#breadcrumb
-        a(href:"/") home
+        a(href="/") home
         - if (host)
           |  /
-          a(href:"/"+ host)= host
+          a(href="/"+ host)= host
         - if(host && database)
           |  /
-          a(href:"/"+ host +"/" +database)= database
+          a(href="/"+ host +"/" +database)= database
         - if(host && database && table)
           |  /
-          a(href:"/"+ host +"/"+ database +"/"+ table)= table
+          a(href="/"+ host +"/"+ database +"/"+ table)= table
 
     #content!= body
     #footer
