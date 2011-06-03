@@ -1,3 +1,5 @@
+- scripts.push('/js/query.js')
+
 form#query(action='/'+ host +'/query', method='post')
   div
     label Database: 
@@ -21,5 +23,3 @@ form#query(action='/'+ host +'/query', method='post')
     button.submit(type='submit') Submit
     button.save(type='button') Save Query
   #results
-
-script(src='/js/query.js')

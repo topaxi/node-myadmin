@@ -5,10 +5,7 @@ module.exports = function(app){
       , db       = app.utils.getDB(host)
       , database = req.params.database
       , locals = {
-          'title':   'node-myadmin:'+ host +'/query'
-        , 'host':     host
-        , 'database': database
-        , 'table':    req.params.table
+          'title': 'node-myadmin:'+ host +'/query'
       }
 
     db.database = database

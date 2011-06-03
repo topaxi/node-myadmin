@@ -34,6 +34,12 @@ server.configure(function() {
   server.set('view engine', config.server.viewEngine)
   server.use(express.bodyParser())
   server.use(express.static(app.path +'/public'))
+  server.dynamicHelpers({
+      'scripts':  function()    { return ['/js/jquery.js', '/js/global.js'] }
+    , 'host':     function(req) { return req.params && req.params.host }
+    , 'database': function(req) { return req.params && req.params.database }
+    , 'table':    function(req) { return req.params && req.params.table }
+  })
 })
 
 // Controller to load jade templates to client

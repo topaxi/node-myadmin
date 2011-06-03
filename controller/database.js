@@ -8,8 +8,6 @@ module.exports = function(app){
       , locals   = {
         'title':   'node-myadmin:'+ host +'/'+ database
       , 'content': 'Tables of '+ database +':'
-      , 'host':    host
-      , 'table':   undefined
     }
 
     db.database = database

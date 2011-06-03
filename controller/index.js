@@ -3,9 +3,6 @@ module.exports = function(app){
     var locals = {
           'title':   'node-myadmin'
         , 'content': 'Hosts:'
-        , 'host':     undefined
-        , 'database': undefined
-        , 'table':    undefined
       }
 
     locals.hosts = []

@@ -3,8 +3,6 @@ html(lang="en")
   head
     title= title
     link(rel="stylesheet", href="/stylesheets/style.css")
-    script(src='/js/jquery.js')
-    script(src='/js/global.js')
   body
     #header
       h1
@@ -34,3 +32,5 @@ html(lang="en")
 
     #content!= body
     #footer
+    - each path in scripts
+      script(src=path)

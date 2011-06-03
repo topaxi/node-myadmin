@@ -3,11 +3,8 @@ module.exports = function(app){
     var host   = req.params.host
       , hosts  = app.config.hosts
       , locals = {
-          'title':    'node-myadmin:'+ host
-        , 'content':  'Databases:'
-        , 'host':     host
-        , 'database': undefined
-        , 'table':    undefined
+          'title':   'node-myadmin:'+ host
+        , 'content': 'Databases:'
       }
 
     app.utils.getDB(host).query('show databases', function(err, result){
