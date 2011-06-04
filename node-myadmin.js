@@ -5,9 +5,16 @@ var app      = { 'path': __dirname }
   , config   = app.config   = require(app.path +'/config/config')
   , stylus   = app.stylus   = require('stylus')
   , jade     = app.jade     = require('jade')
-  , server   = app.server   = express.createServer()
   , utils    = app.utils    = require(app.path +'/lib/utils.js')
+  , server
 ;
+
+server = app.server = !config.server.key || !config.server.cert
+  ? express.createServer()
+  : express.createServer({
+      'key':  config.server.key
+    , 'cert': config.server.cert
+  })
 
 server.configure('development', function(){
   server.use(stylus.middleware({

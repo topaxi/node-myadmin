@@ -4,9 +4,12 @@ module.exports = {
     'server': {
       'port':        8080
     , 'viewEngine': 'jade'
+    // To enable SSL add path to key and certificate
+    , 'key':        ''
+    , 'cert':       ''
   }
   , 'controller': {
-      'path': app_path + '/controller'
+      'path': app_path +'/controller'
   }
   , 'hosts': {
       'localhost': {
