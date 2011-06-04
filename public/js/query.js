@@ -76,6 +76,9 @@ if(localStorage && JSON) {
     if(!$(this).is(':first-child')){
       value = queries[this.innerHTML]
     }
+    else {
+      $('input[name=parameters]').val('')
+    }
 
     $('textarea').val(value)
   })
