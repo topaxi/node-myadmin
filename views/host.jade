@@ -3,5 +3,5 @@ p Databases:
 ul#databases
   - databases.forEach(function(database){
     li
-      a(href="/"+ host +"/"+ database)= database
+      a(href='/#{host}/#{database}')= database
   - })

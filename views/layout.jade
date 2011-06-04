@@ -1,8 +1,8 @@
 !!! 5
-html(lang="en")
+html(lang='en')
   head
     title= title
-    link(rel="stylesheet", href="/stylesheets/style.css")
+    link(rel='stylesheet', href='/stylesheets/style.css')
   body
     #header
       h1
@@ -12,23 +12,23 @@ html(lang="en")
           li
             - if (database)
               - if (table)
-                a(href='/'+ host +'/query/'+ database +'/'+ table) query
+                a(href='/#{host}/query/#{database}/#{table}') query
               - else
-                a(href='/'+ host +'/query/'+ database) query
+                a(href='/#{host}/query/#{database}') query
             - else
-              a(href='/'+ host +'/query') query
+              a(href='/#{host}/query') query
 
       p#breadcrumb
-        a(href="/") home
+        a(href='/') home
         - if (host)
           |  /
-          a(href="/"+ host)= host
+          a(href='/#{host}')= host
         - if(host && database)
           |  /
-          a(href="/"+ host +"/" +database)= database
+          a(href='/#{host}/#{database}')= database
         - if(host && database && table)
           |  /
-          a(href="/"+ host +"/"+ database +"/"+ table)= table
+          a(href='/#{host}/#{database}/#{table}')= table
 
     #content!= body
     #footer

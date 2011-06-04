@@ -1,17 +1,17 @@
 - scripts.push('/js/query.js')
 
-form#query(action='/'+ host +'/query', method='post')
+form#query(action='/#{host}/query', method='post')
   div
     label Database: 
       select(name='database')
         - databases.forEach(function(db){
            - if (db === database)
-              option(value=db,selected)= db
+              option(value=db, selected)= db
            - else
               option(value=db)= db
         - })
       | 
-      a(id='tableList', href='/'+ database) Browse tables
+      a(id='tableList', href='/#{database}') Browse tables
 
   div
     textarea(name='query')
