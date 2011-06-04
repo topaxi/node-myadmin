@@ -1,4 +1,4 @@
-var app_path = __dirname.replace('/config', '');
+var app_path = __dirname.replace('/config', '')
 
 module.exports = {
     'server': {
