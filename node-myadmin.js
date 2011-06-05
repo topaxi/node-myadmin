@@ -52,7 +52,7 @@ server.configure(function() {
     utils.getDB(name, function(err, db) {
       req.db = db
 
-      next()
+      next(err)
     })
   })
 
