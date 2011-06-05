@@ -7,7 +7,6 @@ module.exports = function(app){
         , 'content': 'Databases:'
       }
 
-
     req.db.query('show databases', function(err, result){
       if(err) throw err
 
