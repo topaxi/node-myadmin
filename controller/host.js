@@ -8,23 +8,19 @@ module.exports = function(app){
       }
 
 
-    app.utils.getDB(host, function(err, db) {
+    req.db.query('show databases', function(err, result){
       if(err) throw err
 
-      db.query('show databases', function(err, result){
-        if(err) throw err
+      locals.databases = []
+      for(var row in result){
+        var database = result[row].Database
 
-        locals.databases = []
-        for(var row in result){
-          var database = result[row].Database
-
-          if(app.utils.validDB(hosts[host].host, database)){
-            locals.databases.push(database)
-          }
+        if(app.utils.validDB(hosts[host].host, database)){
+          locals.databases.push(database)
         }
+      }
 
-        res.render('host', {'locals': locals})
-      })
+      res.render('host', {'locals': locals})
     })
   })
 }

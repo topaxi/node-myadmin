@@ -5,7 +5,7 @@ var app      = { 'path': __dirname }
   , config   = app.config   = require(app.path +'/config/config')
   , stylus   = app.stylus   = require('stylus')
   , jade     = app.jade     = require('jade')
-  , utils    = app.utils    = require(app.path +'/lib/utils.js')
+  , utils    = app.utils    = require(app.path +'/lib/utils')
   , server
 ;
 
@@ -46,6 +46,20 @@ server.configure(function() {
     , 'host':     function(req) { return req.params && req.params.host }
     , 'database': function(req) { return req.params && req.params.database }
     , 'table':    function(req) { return req.params && req.params.table }
+  })
+
+  server.param('host', function(req, res, next, name) {
+    utils.getDB(name, function(err, db) {
+      req.db = db
+
+      next()
+    })
+  })
+
+  server.param('database', function(req, res, next, name) {
+    req.db.database = name
+
+    utils.useDatabase(req.db, next)
   })
 })
 
