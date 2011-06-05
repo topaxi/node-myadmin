@@ -58,6 +58,7 @@ loadController('host')
 loadController('database')
 loadController('table')
 
+server.error(require(app.path +'/lib/error.js'))
 
 server.listen(config.server.port)
 console.log('node-myadmin listening on port %d', server.address().port)

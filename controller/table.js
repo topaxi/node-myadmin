@@ -3,21 +3,22 @@ var utils = require('../lib/utils.js')
 module.exports = function(app){
   app.server.get('/:host/:database/:table', function(req, res) {
     var host     = req.params.host
-      , db       = app.utils.getDB(host)
       , table    = req.params.table
       , database = req.params.database
       , locals   = {
           'title': 'node-myadmin:'+ host +'/'+ database +'/'+ table
       }
 
-    db.database = database
+    app.utils.getDB(host, function(err, db) {
+      db.database = database
 
-    describeTable(db, table, function(err, result) {
-      if(err) throw err
+      describeTable(db, table, function(err, result) {
+        if(err) throw err
 
-      locals.fields = result
+        locals.fields = result
 
-      res.render('table', {'locals': locals})
+        res.render('table', {'locals': locals})
+      })
     })
   })
 }

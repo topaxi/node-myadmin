@@ -2,54 +2,57 @@ module.exports = function(app){
   app.server.get('/:host/query/:database?/:table?', function(req, res) {
     var host     = req.params.host
       , hosts    = app.config.hosts
-      , db       = app.utils.getDB(host)
       , database = req.params.database
       , locals = {
           'title': 'node-myadmin:'+ host +'/query'
       }
 
-    db.database = database
+    app.utils.getDB(host, function(err, db){
+      db.database = database
 
-    db.query('show databases', function(err, result){
-      if(err) throw err
+      db.query('show databases', function(err, result){
+        if(err) throw err
 
-      locals.databases = []
-      for(var row in result){
-        var database = result[row].Database
+        locals.databases = []
+        for(var row in result){
+          var database = result[row].Database
 
-        if(app.utils.validDB(hosts[host].host, database)){
-          locals.databases.push(database)
+          if(app.utils.validDB(hosts[host].host, database)){
+            locals.databases.push(database)
+          }
         }
-      }
 
-      res.render('query', {'locals': locals})
+        res.render('query', {'locals': locals})
+      })
     })
   })
 
   app.server.post('/:host/query', function(req, res) {
     var parameters = JSON.parse('['+ req.body.parameters.trim() +']')
-      , db         = app.utils.getDB(req.params.host)
 
-    db.database = req.body.database
-    app.utils.useDatabase(db, function(err) {
-      if (err) {
-        send(err, null)
-      }
-      else {
-        try {
-          if (req.body.query.indexOf('?') < 0) parameters = []
+    app.utils.getDB(req.params.host, function(err, db) {
+      db.database = req.body.database
 
-          // db.query is async, parameter errors can (and should) be catched!
-          db.query(req.body.query, parameters, send)
-        }
-        catch(err) {
+      app.utils.useDatabase(db, function(err) {
+        if (err) {
           send(err, null)
         }
+        else {
+          try {
+            if (req.body.query.indexOf('?') < 0) parameters = []
+
+            // db.query is async, parameter errors can (and should) be catched!
+            db.query(req.body.query, parameters, send)
+          }
+          catch(err) {
+            send(err, null)
+          }
+        }
+      })
+
+      function send(err, data) {
+        res.send({'err': err, 'data': data})
       }
     })
-
-    function send(err, data) {
-      res.send({'err': err, 'data': data})
-    }
   })
 }
