@@ -15,7 +15,7 @@
       // to get the actual function assigned to the callback
       // parameter.
       callback(templates[tpl] = (new Function('return '+ data))())
-    })
+    }, 'text')
   }
   window.getTPL = getTPL
 })()

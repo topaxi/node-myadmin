@@ -52,7 +52,7 @@ $('select[name=database]').change(function(){
 })
 
 if(localStorage && JSON) {
-  var queries = JSON.parse(localStorage.queries) || {}
+  var queries = JSON.parse(localStorage.queries || null) || {}
 
   for(var i in queries) {
     $('#savedQueries').append('<li>'+ i +'</li>')
