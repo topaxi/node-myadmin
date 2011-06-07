@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 
 var app      = { 'path': __dirname }
-  , express  = app.express  = require('express')
-  , config   = app.config   = require(app.path +'/config/config')
-  , stylus   = app.stylus   = require('stylus')
-  , jade     = app.jade     = require('jade')
-  , utils    = app.utils    = require(app.path +'/lib/utils')
+  , jade     = app.jade    = require('jade')
+  , stylus   = app.stylus  = require('stylus')
+  , express  = app.express = require('express')
+  , utils    = app.utils   = require(app.path +'/lib/utils')
+  , config   = app.config  = require(app.path +'/config/config')
   , server
 ;
 
-server = app.server = !config.server.key || !config.server.cert
+app.server = server = !config.server.key || !config.server.cert
   ? express.createServer()
   : express.createServer({
       'key':  config.server.key
