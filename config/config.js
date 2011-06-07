@@ -2,19 +2,16 @@ var app_path = __dirname.replace('/config', '')
 
 module.exports = {
     'server': {
-      'port':        8080
-    , 'viewEngine': 'jade'
+    // On which port should node-myadmin listen?
+      'port': 8080
     // To enable SSL add path to key and certificate
-    , 'key':        ''
-    , 'cert':       ''
+    , 'key':  ''
+    , 'cert': ''
     // HTTP BasicAuth, set login and pw to restrict access
     , 'auth': {
         'login':    'admin'
       , 'password': ''
     }
-  }
-  , 'controller': {
-      'path': app_path +'/controller'
   }
   , 'hosts': {
       'localhost': {

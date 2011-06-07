@@ -40,7 +40,7 @@ server.configure('production', function(){
 server.configure(function() {
   var conf = config.server
 
-  server.set('view engine', conf.viewEngine)
+  server.set('view engine', 'jade')
   server.use(express.bodyParser())
 
   if(conf.auth && conf.auth.login && conf.auth.password){
@@ -85,5 +85,5 @@ server.listen(config.server.port)
 console.log('node-myadmin listening on port %d', server.address().port)
 
 function loadController(controller){
-  return require(config.controller.path +'/'+ controller)(app)
+  return require(app.path +'/controller/'+ controller)(app)
 }
