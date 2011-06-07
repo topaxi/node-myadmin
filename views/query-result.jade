@@ -31,11 +31,13 @@
 
           - field++
           - }
+  - else if(data.length === 0)
+    p No matching results
   - else
     p Affected rows: #{data.affectedRows >>> 0}
 
     - if (data.insertId)
       p Insert ID: #{data.insertId}
 
-    - if(data.message)
+    - if (data.message)
       p Message: #{data.message}
