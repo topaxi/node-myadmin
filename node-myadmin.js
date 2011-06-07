@@ -38,14 +38,21 @@ server.configure('production', function(){
 })
 
 server.configure(function() {
-  server.set('view engine', config.server.viewEngine)
+  var conf = config.server
+
+  server.set('view engine', conf.viewEngine)
   server.use(express.bodyParser())
+
+  if(conf.auth && conf.auth.login && conf.auth.password){
+    server.use(express.basicAuth(conf.auth.login, conf.auth.password))
+  }
+
   server.use(express.static(app.path +'/public'))
   server.dynamicHelpers({
       'scripts':  function()    { return ['/js/jquery.js', '/js/global.js'] }
-    , 'host':     function(req) { return req.params && req.params.host }
-    , 'database': function(req) { return req.params && req.params.database }
-    , 'table':    function(req) { return req.params && req.params.table }
+    , 'host':     function(req) { return req.params && req.params.host      }
+    , 'database': function(req) { return req.params && req.params.database  }
+    , 'table':    function(req) { return req.params && req.params.table     }
   })
 
   server.param('host', function(req, res, next, name) {

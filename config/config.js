@@ -7,6 +7,11 @@ module.exports = {
     // To enable SSL add path to key and certificate
     , 'key':        ''
     , 'cert':       ''
+    // HTTP BasicAuth, set login and pw to restrict access
+    , 'auth': {
+        'login':    'admin'
+      , 'password': ''
+    }
   }
   , 'controller': {
       'path': app_path +'/controller'
