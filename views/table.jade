@@ -1,13 +1,21 @@
+ul
+  li: a(href='/#{host}/#{database}/#{table}/truncate'
+      , onclick='return confirm("You are about to truncate the table `#{table}`, are you sure?")')
+      | Truncate table
+  li: a(href='/#{host}/#{database}/#{table}/drop'
+      , onclick='return confirm("You are about to drop the table `#{table}`, are you sure?")')
+      | Drop table
+
 table#fields
   tr
-    th Field
-    th Type
-    th Null
-    th Key
-    th Default
-    th Extra
+    th.field Field
+    th.type Type
+    th.null Null
+    th.key Key
+    th.default Default
+    th.extra Extra
 
-  - fields.forEach(function(field){
+  - each field in fields
     tr(class=field.Key.toLowerCase())
       td.field= field.Field
       td.type= field.Type
@@ -15,4 +23,3 @@ table#fields
       td.key= field.Key
       td.default= field.Default
       td.extra= field.Extra
-  - })

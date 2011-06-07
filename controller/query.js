@@ -38,17 +38,22 @@ module.exports = function(app){
             if (req.body.query.indexOf('?') < 0) parameters = []
 
             // db.query is async, parameter errors can (and should) be catched!
-            db.query(req.body.query, parameters, send)
+            var query = db.query(req.body.query, parameters, send)
           }
           catch(err) {
             send(err, null)
           }
         }
-      })
 
-      function send(err, data) {
-        res.send({'err': err, 'data': data})
-      }
+        function send(err, data) {
+          res.send({'err': err, 'data': data, 'query': !query ? null : {
+              'sql':      query.sql
+            , 'typeCast': query.typeCast
+            , 'fields':   query._fields
+            , 'database': db.database
+          }})
+        }
+      })
     })
   })
 }

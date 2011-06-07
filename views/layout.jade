@@ -22,13 +22,13 @@ html(lang='en')
         a(href='/') home
         - if (host)
           |  /
-          a(href='/#{host}')= host
+          a#host(href='/#{host}')= host
         - if(host && database)
           |  /
-          a(href='/#{host}/#{database}')= database
+          a#database(href='/#{host}/#{database}')= database
         - if(host && database && table)
           |  /
-          a(href='/#{host}/#{database}/#{table}')= table
+          a#table(href='/#{host}/#{database}/#{table}')= table
 
     #content!= body
     #footer

@@ -1,27 +1,36 @@
 - if(err)
   div.error
-    p.code= err.sqlState
     p.message= err.message
-    pre.sql= err.sql
+    p.code SQL State: #{err.sqlState}
     pre.stack= err.stack
 - else
   - if(data.length)
     table
       tr
-        - for(var i in data[0]) {
-          th= i
-        - }
+        - each field in query.fields
+          - if(field.flags & Field.PRI_KEY_FLAG)
+            th.pri= field.name
+          - else if(field.flags & Field.UNIQUE_KEY_FLAG)
+            th.uni= field.name
+          - else
+            th= field.name
 
-      - data.forEach(function(result){
-        tr
-          - for(var i in result) {
-            - if (result[i] === null)
+      - each row in data
+        tr(data-keys=rowLink(query, row))
+          - var field = 0
+          - for(var i in row) {
+            - if (row[i] === null)
               td.null NULL
             - else
-              //- td= formatDate(result[i])
-              td= result[i]
+              - if(query.fields[field].flags & Field.PRI_KEY_FLAG)
+                td.pri= row[i]
+              - else if(query.fields[field].flags & Field.UNIQUE_KEY_FLAG)
+                td.uni= row[i]
+              - else
+                td= row[i]
+
+          - field++
           - }
-      - })
   - else
     p Affected rows: #{data.affectedRows}
 
