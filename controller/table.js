@@ -24,4 +24,12 @@ module.exports = function(app){
       res.redirect('/'+ db.host +'/'+ db.database)
     })
   })
+
+  app.server.get('/:host/:database/:table/truncate', function(req, res) {
+    var query = req.db.query('TRUNCATE TABLE `'+ req.params.table +'`', function(err, data){
+      if(err) throw err
+
+      res.redirect('/'+ req.params.host +'/query/'+ req.params.database +'/'+ req.params.table)
+    })
+  })
 }

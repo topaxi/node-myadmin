@@ -34,7 +34,8 @@ function rowLink(query, row) {
   }
 
   // We should not update / delete rows from multiple tables.
-  // How does phpmyadmin handle the edit / delte button on joined query results?
+  // Currently the fields do not have flags for PRI / UNIQUE etc. for foreign
+  // tables, so this check is not really necessary yet
   i = 0; for(l in keys) i++
   if(!i || i > 1) return
 

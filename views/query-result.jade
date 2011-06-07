@@ -32,7 +32,7 @@
           - field++
           - }
   - else
-    p Affected rows: #{data.affectedRows}
+    p Affected rows: #{data.affectedRows >>> 0}
 
     - if (data.insertId)
       p Insert ID: #{data.insertId}
