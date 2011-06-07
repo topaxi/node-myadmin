@@ -1,4 +1,4 @@
-jQuery(function($) {
+jQuery(function($){
 
 var Field = {
     NOT_NULL_FLAG:            1
@@ -19,15 +19,15 @@ var Field = {
   , NUM_FLAG:             32768
 }
 
-function rowLink(query, row) {
+function rowLink(query, row){
   var fields = query.fields
     , keys   = {}
     , l      = fields.length
     , i      = 0
 
-  for(; i < l; ++i) {
+  for(; i < l; ++i){
     if(fields[i].flags & Field.PRI_KEY_FLAG ||
-        fields[i].flags & Field.UNIQUE_KEY_FLAG) {
+        fields[i].flags & Field.UNIQUE_KEY_FLAG){
       (keys[fields[i].originalTable] = keys[fields[i].originalTable] || {})
         [fields[i].originalName] = row[fields[i].name]
     }
@@ -49,13 +49,13 @@ var textareaHeight = $('textarea').height()
 
 // Insert tab character on tab key
 $('textarea').bind('keydown', function(e){
-  if (e.keyCode === 13 && e.ctrlKey) {
+  if(e.keyCode === 13 && e.ctrlKey){
     $(this.form).submit()
 
     return
   }
 
-  if (e.keyCode === 9) {
+  if(e.keyCode === 9){
     e.preventDefault()
 
     var value           = this.value
@@ -78,14 +78,14 @@ $('#query').submit(function(e){
       +' `'+ matches[3] +'`?'
 
   // Warn user on drop or truncate queries
-  if(matches && !confirm(msg)) {
+  if(matches && !confirm(msg)){
     return
   }
 
   hideTextarea()
 
-  $.post(this.action, $(this).serialize(), function(data) {
-    getTPL('query-result', function(tpl) {
+  $.post(this.action, $(this).serialize(), function(data){
+    getTPL('query-result', function(tpl){
       data.Field   = Field
       data.rowLink = rowLink
 
@@ -94,17 +94,17 @@ $('#query').submit(function(e){
   })
 })
 
-function hideTextarea() {
+function hideTextarea(){
   var $text = $('textarea').height(64)
 
-  $text.one('focus', function() {
+  $text.one('focus', function(){
     $text.height(textareaHeight)
   })
 }
 
-;(function() {
+;(function(){
   var matches
-  if (matches = /\/query\/(.*?)\/(.*?)$/.exec(location.pathname)) {
+  if(matches = /\/query\/(.*?)\/(.*?)$/.exec(location.pathname)){
     var query = 'SELECT * FROM '+ matches[2] +' LIMIT 0, 10'
 
     $('textarea').val(query)
@@ -117,14 +117,14 @@ $('select[name=database]').change(function(){
   $('#tableList').attr('href', '/'+ this.value)
 })
 
-if(localStorage && JSON) {
+if(localStorage && JSON){
   var queries = JSON.parse(localStorage.queries || null) || {}
 
-  for(var i in queries) {
+  for(var i in queries){
     $('#savedQueries').append('<li>'+ i +'</li>')
   }
 
-  $('button.save').click(function() {
+  $('button.save').click(function(){
     var name = prompt('Save query as:')
 
     if(!queries[name]){

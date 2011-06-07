@@ -1,6 +1,6 @@
 module.exports = function(app){
 
-  app.server.get('/:host/:database/:table', function(req, res) {
+  app.server.get('/:host/:database/:table', function(req, res){
     var host     = req.params.host
       , table    = req.params.table
       , database = req.params.database
@@ -8,8 +8,8 @@ module.exports = function(app){
 
     locals.title = 'node-myadmin:'+ host +'/'+ database +'/'+ table
 
-    var query = req.db.query('describe '+ table, function(err, data) {
-      if (err) throw err
+    var query = req.db.query('describe '+ table, function(err, data){
+      if(err) throw err
 
       locals.fields = data
 
@@ -17,7 +17,7 @@ module.exports = function(app){
     })
   })
 
-  app.server.get('/:host/:database/:table/drop', function(req, res) {
+  app.server.get('/:host/:database/:table/drop', function(req, res){
     var query = req.db.query('DROP TABLE `'+ req.params.table +'`', function(err, data){
       if(err) throw err
 
@@ -25,7 +25,7 @@ module.exports = function(app){
     })
   })
 
-  app.server.get('/:host/:database/:table/truncate', function(req, res) {
+  app.server.get('/:host/:database/:table/truncate', function(req, res){
     var query = req.db.query('TRUNCATE TABLE `'+ req.params.table +'`', function(err, data){
       if(err) throw err
 

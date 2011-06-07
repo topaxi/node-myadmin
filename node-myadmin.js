@@ -37,7 +37,7 @@ server.configure('production', function(){
   server.use(express.errorHandler())
 })
 
-server.configure(function() {
+server.configure(function(){
   var conf = config.server
 
   server.set('view engine', 'jade')
@@ -49,21 +49,21 @@ server.configure(function() {
 
   server.use(express.static(app.path +'/public'))
   server.dynamicHelpers({
-      'scripts':  function()    { return ['/js/jquery.js', '/js/global.js'] }
-    , 'host':     function(req) { return req.params && req.params.host      }
-    , 'database': function(req) { return req.params && req.params.database  }
-    , 'table':    function(req) { return req.params && req.params.table     }
+      'scripts':  function()   { return ['/js/jquery.js', '/js/global.js'] }
+    , 'host':     function(req){ return req.params && req.params.host      }
+    , 'database': function(req){ return req.params && req.params.database  }
+    , 'table':    function(req){ return req.params && req.params.table     }
   })
 
-  server.param('host', function(req, res, next, name) {
-    utils.getDB(name, function(err, db) {
+  server.param('host', function(req, res, next, name){
+    utils.getDB(name, function(err, db){
       req.db = db
 
       next(err)
     })
   })
 
-  server.param('database', function(req, res, next, name) {
+  server.param('database', function(req, res, next, name){
     req.db.database = name
 
     utils.useDatabase(req.db, next)

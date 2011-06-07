@@ -1,5 +1,5 @@
 module.exports = function(app){
-  app.server.get('/:host/query/:database?/:table?', function(req, res) {
+  app.server.get('/:host/query/:database?/:table?', function(req, res){
     var host     = req.params.host
       , hosts    = app.config.hosts
       , database = req.params.database
@@ -23,19 +23,19 @@ module.exports = function(app){
     })
   })
 
-  app.server.post('/:host/query', function(req, res) {
+  app.server.post('/:host/query', function(req, res){
     var parameters = JSON.parse('['+ req.body.parameters.trim() +']')
 
-    app.utils.getDB(req.params.host, function(err, db) {
+    app.utils.getDB(req.params.host, function(err, db){
       db.database = req.body.database
 
-      app.utils.useDatabase(db, function(err) {
-        if (err) {
+      app.utils.useDatabase(db, function(err){
+        if(err){
           send(err, null)
         }
         else {
           try {
-            if (req.body.query.indexOf('?') < 0) parameters = []
+            if(req.body.query.indexOf('?') < 0) parameters = []
 
             // db.query is async, parameter errors can (and should) be catched!
             var query = db.query(req.body.query, parameters, send)
@@ -45,7 +45,7 @@ module.exports = function(app){
           }
         }
 
-        function send(err, data) {
+        function send(err, data){
           res.send({'err': err, 'data': data, 'query': !query ? null : {
               'sql':      query.sql
             , 'typeCast': query.typeCast
