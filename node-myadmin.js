@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-var app      = { 'path': __dirname }
-  , jade     = app.jade    = require('jade')
-  , stylus   = app.stylus  = require('stylus')
-  , express  = app.express = require('express')
-  , utils    = app.utils   = require(app.path +'/lib/utils')
-  , config   = app.config  = require(app.path +'/config/config')
+var app     = { 'path': __dirname }
+  , jade    = app.jade    = require('jade')
+  , stylus  = app.stylus  = require('stylus')
+  , express = app.express = require('express')
+  , utils   = app.utils   = require(app.path +'/lib/utils')
+  , config  = app.config  = require(app.path +'/config/config')
   , server
 ;
 
