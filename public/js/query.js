@@ -58,13 +58,15 @@ $('textarea').bind('keydown', function(e){
   if(e.keyCode === 9){
     e.preventDefault()
 
-    var value           = this.value
+    var scrollTop       = this.scrollTop
+      , value           = this.value
       , selectionEnd    = this.selectionEnd
       , beforeSelection = value.slice(0, selectionEnd)
       , afterSelection  = value.slice(selectionEnd)
 
     this.value        = beforeSelection +'\t'+ afterSelection
     this.selectionEnd = selectionEnd + 1
+    this.scrollTop    = scrollTop
   }
 })
 
