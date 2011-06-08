@@ -17,17 +17,17 @@ module.exports = function(app){
     })
   })
 
-  app.server.get('/:host/:database/:table/drop', function(req, res){
+  app.server.get('/:host/:database/:table/drop', function(req, res, next){
     var query = req.db.query('DROP TABLE `'+ req.params.table +'`', function(err, data){
-      if(err) throw err
+      if(err) return next(err)
 
-      res.redirect('/'+ db.host +'/'+ db.database)
+      res.redirect('/'+ req.params.host +'/'+ req.params.database)
     })
   })
 
-  app.server.get('/:host/:database/:table/truncate', function(req, res){
+  app.server.get('/:host/:database/:table/truncate', function(req, res, next){
     var query = req.db.query('TRUNCATE TABLE `'+ req.params.table +'`', function(err, data){
-      if(err) throw err
+      if(err) return next(err)
 
       res.redirect('/'+ req.params.host +'/query/'+ req.params.database +'/'+ req.params.table)
     })
