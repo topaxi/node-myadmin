@@ -18,7 +18,7 @@ app.server = server = !config.server.key || !config.server.cert
 
 server.configure('development', function(){
   server.use(stylus.middleware({
-      'debug': true
+      'debug': !true
     , 'src':   app.path +'/public'
   }))
 
