@@ -19,7 +19,7 @@ table#fields
     tr(class=field.Key.toLowerCase())
       td.field= field.Field
       td.type= field.Type
-      td.null= field.Null
+      td.null: input(type='checkbox', checked=field.Null === 'YES', disabled)
       td.key= field.Key
       td.default= field.Default
       td.extra= field.Extra
