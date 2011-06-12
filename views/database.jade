@@ -1,7 +1,6 @@
-p Tables (#{tables.length}):
+p #{tables.length} Tables:
 
 ul#tables
-  - tables.forEach(function(table){
+  - each table in tables
     li
       a(href='/#{host}/#{database}/#{table}')= table
-  - })
