@@ -4,12 +4,11 @@ form#query(action='/#{host}/query', method='post')
   div
     label Database: 
       select(name='database')
-        - databases.forEach(function(db){
+        - each db in databases
            - if (db === database)
               option(value=db, selected)= db
            - else
               option(value=db)= db
-        - })
       | 
       a(id='tableList', href='/#{database}') Browse tables
 

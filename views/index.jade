@@ -1,7 +1,6 @@
-p Hosts:
+p #{hosts.length} Hosts:
 
 ul#hosts
-  - hosts.forEach(function(host){
+  - each host in hosts
     li
       a(href='/#{host}')= host
-  - })
