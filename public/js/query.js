@@ -116,7 +116,7 @@ function hideTextarea(){
 })()
 
 $('select[name=database]').change(function(){
-  $('#tableList').attr('href', '/'+ this.value)
+  $('#tableList').attr('href', '/'+ $('#host').text() +'/'+ this.value)
 })
 
 if(localStorage && JSON){

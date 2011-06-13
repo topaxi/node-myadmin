@@ -6,7 +6,7 @@ form#query(action='/#{host}/query', method='post')
       - each db in databases
         option(value=db, selected=db === database)= db
     | 
-    a(id='tableList', href='/#{database}') Browse tables
+    a(id='tableList', href='/#{host}/#{database}') Browse tables
 
   div.container12
     textarea(name='query').grid10.alpha
