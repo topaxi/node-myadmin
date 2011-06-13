@@ -18,8 +18,9 @@ app.server = server = !config.server.key || !config.server.cert
 
 server.configure('development', function(){
   server.use(stylus.middleware({
-      'debug': !true
-    , 'src':   app.path +'/public'
+      'debug':    !true
+    , 'compress': false
+    , 'src':      app.path +'/public'
   }))
 
   server.use(express.errorHandler({
@@ -30,8 +31,9 @@ server.configure('development', function(){
 
 server.configure('production', function(){
   server.use(stylus.middleware({
-      'debug': false
-    , 'src':   app.path +'/public'
+      'debug':    false
+    , 'compress': true
+    , 'src':      app.path +'/public'
   }))
 
   server.use(express.errorHandler())
