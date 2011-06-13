@@ -1,11 +1,11 @@
 module.exports = function(err, req, res, next) {
-  if(res.finished) {
+  if (res.finished) {
     console.log(err.stack)
 
     return
   }
 
-  if(req.xhr){
+  if (req.xhr) {
     res.send({'err': err, 'data': null})
   }
   else {

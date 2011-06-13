@@ -16,7 +16,7 @@ app.server = server = !config.server.key || !config.server.cert
     , 'cert': config.server.cert
   })
 
-server.configure('development', function(){
+server.configure('development', function() {
   server.use(stylus.middleware({
       'debug':    !true
     , 'compress': false
@@ -29,7 +29,7 @@ server.configure('development', function(){
   }))
 })
 
-server.configure('production', function(){
+server.configure('production', function() {
   server.use(stylus.middleware({
       'debug':    false
     , 'compress': true
@@ -39,33 +39,33 @@ server.configure('production', function(){
   server.use(express.errorHandler())
 })
 
-server.configure(function(){
+server.configure(function() {
   var conf = config.server
 
   server.set('view engine', 'jade')
   server.use(express.bodyParser())
 
-  if(conf.auth && conf.auth.login && conf.auth.password){
+  if (conf.auth && conf.auth.login && conf.auth.password) {
     server.use(express.basicAuth(conf.auth.login, conf.auth.password))
   }
 
   server.use(express.static(app.path +'/public'))
   server.dynamicHelpers({
-      'scripts':  function()   { return ['/js/jquery.js', '/js/global.js'] }
-    , 'host':     function(req){ return req.params && req.params.host      }
-    , 'database': function(req){ return req.params && req.params.database  }
-    , 'table':    function(req){ return req.params && req.params.table     }
+      'scripts':  function()    { return ['/js/jquery.js', '/js/global.js'] }
+    , 'host':     function(req) { return req.params && req.params.host      }
+    , 'database': function(req) { return req.params && req.params.database  }
+    , 'table':    function(req) { return req.params && req.params.table     }
   })
 
-  server.param('host', function(req, res, next, name){
-    utils.getDB(name, function(err, db){
+  server.param('host', function(req, res, next, name) {
+    utils.getDB(name, function(err, db) {
       req.db = db
 
       next(err)
     })
   })
 
-  server.param('database', function(req, res, next, name){
+  server.param('database', function(req, res, next, name) {
     req.db.database = name
 
     utils.useDatabase(req.db, next)
@@ -86,6 +86,6 @@ server.error(require(app.path +'/controller/error.js'))
 server.listen(config.server.port)
 console.log('node-myadmin listening on port %d', server.address().port)
 
-function loadController(controller){
+function loadController(controller) {
   return require(app.path +'/controller/'+ controller)(app)
 }

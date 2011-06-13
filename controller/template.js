@@ -3,19 +3,21 @@ var fs       = require('fs')
   , Parser   = jade.Parser
   , Compiler = jade.Compiler
 
-module.exports = function(app){
-  app.server.get('/template/:template', function(req, res){
+module.exports = function(app) {
+  app.server.get('/template/:template', function(req, res, next) {
     var file = app.path +'/views/'+ req.params.template +'.jade'
 
-    fs.readFile(file, function(err, data){
+    fs.readFile(file, function(err, data) {
+      if (err) return next(err)
+
       res.send(compile(data, {'filename': file, 'debug': false}).toString())
     })
   })
 }
 
-function compile(str, options){
+function compile(str, options) {
   var fn = [
-      'try {'
+      'try{'
     , parse(String(str), options || {})
     , '}catch(_){if(console)console.log(_)}'
   ].join('\n')
@@ -24,7 +26,7 @@ function compile(str, options){
 }
 
 // The following methods are copied and modified from jade.js
-function parse(str, options){
+function parse(str, options) {
   var filename = options.filename
     , utils    = require('jade').utils
 
@@ -39,9 +41,9 @@ function parse(str, options){
     compiler.buffer = function(str, esc){
       var buf = this.buf
 
-      if(esc) str = utils.escape(str)
+      if (esc) str = utils.escape(str)
 
-      if(this.lastBufferedIndex == buf.length){
+      if (this.lastBufferedIndex == buf.length) {
         buf.pop()
         str = this.lastBufferedString + str
       }
@@ -53,7 +55,7 @@ function parse(str, options){
     var js = compiler.compile()
 
     // Debug compiler
-    if(options.debug){
+    if (options.debug) {
       console.log('\n\x1b[1mCompiled Function\x1b[0m:\n\n%s', js.replace(/^/gm, ' '))
     }
 
@@ -67,18 +69,18 @@ function parse(str, options){
           : 'with (locals || {}){'+ js +'}')
         + 'return buf.join("");'
     }
-    catch(err){
+    catch (err) {
       process.compile(js, filename || 'Jade')
 
       return
     }
   }
-  catch(err){
+  catch (err) {
     console.log(err)
   }
 }
 
-function attrs(obj){
+function attrs(obj) {
   var buf   = []
     , terse = obj.terse
 
@@ -87,15 +89,15 @@ function attrs(obj){
   var keys = Object.keys(obj)
     , len  = keys.length
 
-  if(len){
+  if (len) {
     buf.push('')
 
-    for (var i = 0; i < len; ++i){
+    for (var i = 0; i < len; ++i) {
       var key = keys[i]
         , val = obj[key]
 
-      if(typeof val === 'boolean' || val === '' || val == null){
-        if(val){
+      if (typeof val === 'boolean' || val === '' || val == null) {
+        if (val) {
           terse
             ? buf.push(key)
             : buf.push(key + '="' + key + '"')
@@ -110,7 +112,7 @@ function attrs(obj){
   return buf.join(' ')
 }
 
-function escape(html){
+function escape(html) {
   return String(html)
     .replace(/&(?!\w+;)/g, '&amp;')
     .replace(/</g, '&lt;')

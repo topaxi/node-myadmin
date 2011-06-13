@@ -1,10 +1,10 @@
-- if(err)
+- if (err)
   div.error
     p.message= err.message
     p.code SQL State: #{err.sqlState}
     pre.stack= err.stack
 - else
-  - if(data.length)
+  - if (data.length)
     table
       tr
         - each field in query.fields
@@ -18,7 +18,7 @@
       - each row in data
         tr(data-keys=rowLink(query, row))
           - var field = 0
-          - for(var i in row) {
+          - for (var i in row) {
             - if (row[i] === null)
               td.null NULL
             - else
@@ -31,7 +31,7 @@
 
           - field++
           - }
-  - else if(data.length === 0)
+  - else if (data.length === 0)
     p No matching results
   - else
     p Affected rows: #{data.affectedRows >>> 0}

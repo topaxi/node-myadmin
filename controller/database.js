@@ -1,5 +1,5 @@
-module.exports = function(app){
-  app.server.get('/:host/:database', function(req, res){
+module.exports = function(app) {
+  app.server.get('/:host/:database', function(req, res, next) {
     var host     = req.params.host
       , database = req.params.database
       , locals   = {
@@ -7,11 +7,11 @@ module.exports = function(app){
       , 'content': 'Tables of '+ database +':'
     }
 
-    req.db.query('show tables', function(err, result){
-      if(err) throw err
+    req.db.query('show tables', function(err, result) {
+      if (err) return next(err)
 
       locals.tables = []
-      for(var row in result){
+      for (var row in result) {
         locals.tables.push(result[row][firstIndexName(result[row])])
       }
 
@@ -22,6 +22,6 @@ module.exports = function(app){
   })
 }
 
-function firstIndexName(obj){
-  for(var i in obj) return i
+function firstIndexName(obj) {
+  for (var i in obj) return i
 }

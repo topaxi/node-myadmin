@@ -1,5 +1,5 @@
-module.exports = function(app){
-  app.server.get('/:host/query/:database?/:table?', function(req, res){
+module.exports = function(app) {
+  app.server.get('/:host/query/:database?/:table?', function(req, res, next) {
     var host     = req.params.host
       , hosts    = app.config.hosts
       , database = req.params.database
@@ -7,14 +7,14 @@ module.exports = function(app){
           'title': 'node-myadmin:'+ host +'/query'
       }
 
-    req.db.query('show databases', function(err, result){
-      if(err) throw err
+    req.db.query('show databases', function(err, result) {
+      if (err) return next(err)
 
       locals.databases = []
-      for(var row in result){
+      for (var row in result) {
         var database = result[row].Database
 
-        if(app.utils.validDB(hosts[host].host, database)){
+        if (app.utils.validDB(hosts[host].host, database)) {
           locals.databases.push(database)
         }
       }
@@ -23,26 +23,27 @@ module.exports = function(app){
     })
   })
 
-  app.server.post('/:host/query', function(req, res){
+  app.server.post('/:host/query', function(req, res) {
     var parameters = JSON.parse('['+ req.body.parameters.trim() +']')
 
-    app.utils.getDB(req.params.host, function(err, db){
+    app.utils.getDB(req.params.host, function(err, db) {
       db.database = req.body.database
 
-      app.utils.useDatabase(db, function(err){
-        if(err){
+      app.utils.useDatabase(db, function(err) {
+        if (err) {
           send(err, null)
-        }
-        else {
-          try {
-            if(req.body.query.indexOf('?') < 0) parameters = []
 
-            // db.query is async, parameter errors can (and should) be catched!
-            var query = db.query(req.body.query, parameters, send)
-          }
-          catch(err) {
-            send(err, null)
-          }
+          return
+        }
+
+        try {
+          if (req.body.query.indexOf('?') < 0) parameters = []
+
+          // db.query is async, parameter errors can (and should) be catched!
+          var query = db.query(req.body.query, parameters, send)
+        }
+        catch (err) {
+          send(err, null)
         }
 
         function send(err, data){

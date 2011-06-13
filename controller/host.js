@@ -1,5 +1,5 @@
-module.exports = function(app){
-  app.server.get('/:host', function(req, res){
+module.exports = function(app) {
+  app.server.get('/:host', function(req, res, next) {
     var host   = req.params.host
       , hosts  = app.config.hosts
       , locals = {
@@ -7,14 +7,14 @@ module.exports = function(app){
         , 'content': 'Databases:'
       }
 
-    req.db.query('show databases', function(err, result){
-      if(err) throw err
+    req.db.query('show databases', function(err, result) {
+      if (err) next(err)
 
       locals.databases = []
-      for(var row in result){
+      for (var row in result) {
         var database = result[row].Database
 
-        if(app.utils.validDB(hosts[host].host, database)){
+        if (app.utils.validDB(hosts[host].host, database)) {
           locals.databases.push(database)
         }
       }
