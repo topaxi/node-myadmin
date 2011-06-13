@@ -17,11 +17,12 @@ config.hosts = {
     'localhost': {
       'user':      'root'
     , 'password':  '123qwe'
-    , 'databases': []
-    , 'host':      'localhost'
-    , 'port':      3306
-    , 'typeCast':  true
-    , 'debug':     false
+    // Optional configuration variables
+    //, 'databases': []
+    //, 'host':      'localhost'
+    //, 'port':      3306
+    //, 'typeCast':  true
+    //, 'debug':     false
   }
   , 'dev.gameswelt': {
       'user':      'root'
