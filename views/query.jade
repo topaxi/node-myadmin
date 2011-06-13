@@ -1,24 +1,22 @@
 - scripts.push('/js/query.js')
 
 form#query(action='/#{host}/query', method='post')
-  div
-    label Database: 
-      select(name='database')
-        - each db in databases
-           - if (db === database)
-              option(value=db, selected)= db
-           - else
-              option(value=db)= db
-      | 
-      a(id='tableList', href='/#{database}') Browse tables
+  div: label Database: 
+    select(name='database')
+      - each db in databases
+        option(value=db, selected=db === database)= db
+    | 
+    a(id='tableList', href='/#{database}') Browse tables
 
-  div
-    textarea(name='query')
-    ul#savedQueries
-      li Empty query
-    label(title="Insert query paramters, separated by comma. Example: 2,'blubber',3,4") Query parameters: 
+  div.container12
+    textarea(name='query').grid10.alpha
+    ul#savedQueries.grid2.omega
+      li.clickable Empty query
+    label.grid12(title="Insert query paramters, separated by comma. Example: 2,'blubber',3,4") Query parameters: 
       input(name='parameters')
-  div
+
+  div.grid12
     button.submit(type='submit',title='Press ctrl+return to submit.') Submit
     button.save(type='button') Save Query
-  #results
+
+  #results.grid12

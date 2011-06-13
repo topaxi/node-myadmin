@@ -123,14 +123,14 @@ if(localStorage && JSON){
   var queries = JSON.parse(localStorage.queries || null) || {}
 
   for(var i in queries){
-    $('#savedQueries').append('<li>'+ i +'</li>')
+    $('#savedQueries').append('<li class="clickable">'+ i +'</li>')
   }
 
   $('button.save').click(function(){
     var name = prompt('Save query as:')
 
     if(!queries[name]){
-      $('#savedQueries').append('<li>'+ name +'</li>')
+      $('#savedQueries').append('<li class="clickable">'+ name +'</li>')
     }
 
     queries[name] = $('textarea').val()

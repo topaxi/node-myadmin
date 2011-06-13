@@ -3,20 +3,10 @@ html(lang='en')
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body
+  body.container12
     #header
       h1
         a(href='/') node-myadmin
-      ul.menu
-        - if(host)
-          li
-            - if (database)
-              - if (table)
-                a(href='/#{host}/query/#{database}/#{table}') query
-              - else
-                a(href='/#{host}/query/#{database}') query
-            - else
-              a(href='/#{host}/query') query
 
       p#breadcrumb
         a(href='/') home
@@ -29,6 +19,17 @@ html(lang='en')
         - if(host && database && table)
           |  /
           a#table(href='/#{host}/#{database}/#{table}')= table
+
+      ul.menu
+        - if(host)
+          li
+            - if (database)
+              - if (table)
+                a(href='/#{host}/query/#{database}/#{table}') query
+              - else
+                a(href='/#{host}/query/#{database}') query
+            - else
+              a(href='/#{host}/query') query
 
     #content!= body
     #footer

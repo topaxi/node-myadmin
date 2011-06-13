@@ -1,0 +1,337 @@
+/*
+  Variable Grid System.
+  Learn more ~ http//www.spry-soft.com/grids/
+  Based on 960 Grid System - http//960.gs/
+
+  Licensed under GPL and MIT.
+*/
+
+/*
+  Forces backgrounds to span full width,
+  even if there is horizontal scrolling.
+  Increase this if your layout is wider.
+
+  Note IE6 works fine without this fix.
+*/
+body {
+  min-width 1140px
+}
+
+/* Containers
+----------------------------------------------------------------------------------------------------*/
+.container12 {
+  margin-left auto
+  margin-right auto
+  width 1140px
+}
+
+/* Grid >> Global
+----------------------------------------------------------------------------------------------------*/
+.grid1,
+.grid2,
+.grid3,
+.grid4,
+.grid5,
+.grid6,
+.grid7,
+.grid8,
+.grid9,
+.grid10,
+.grid11,
+.grid12 {
+  display inline
+  float left
+  position relative
+  margin-left 5px
+  margin-right 5px
+}
+
+.push1, .pull1,
+.push2, .pull2,
+.push3, .pull3,
+.push4, .pull4,
+.push5, .pull5,
+.push6, .pull6,
+.push7, .pull7,
+.push8, .pull8,
+.push9, .pull9,
+.push10, .pull10,
+.push11, .pull11,
+.push12, .pull12 {
+  position relative
+}
+
+
+/* Grid >> Children (Alpha ~ First, Omega ~ Last)
+----------------------------------------------------------------------------------------------------*/
+.alpha
+  margin-left 0
+
+.omega
+  margin-right 0
+
+.container12 .grid12
+  margin-left 0
+  margin-right 0
+
+/* Grid >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+.container12 .grid1 {
+  width 85px
+}
+
+.container12 .grid2 {
+  width 180px
+}
+
+.container12 .grid3 {
+  width 275px
+}
+
+.container12 .grid4 {
+  width 370px
+}
+
+.container12 .grid5 {
+  width 465px
+}
+
+.container12 .grid6 {
+  width 560px
+}
+
+.container12 .grid7 {
+  width 655px
+}
+
+.container12 .grid8 {
+  width 750px
+}
+
+.container12 .grid9 {
+  width 845px
+}
+
+.container12 .grid10 {
+  width 940px
+}
+
+.container12 .grid11 {
+  width 1035px
+}
+
+.container12 .grid12 {
+  width 1130px
+}
+
+/* Prefix Extra Space >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+.container12 .prefix1 {
+  padding-left 95px
+}
+
+.container12 .prefix2 {
+  padding-left 190px
+}
+
+.container12 .prefix3 {
+  padding-left 285px
+}
+
+.container12 .prefix4 {
+  padding-left 380px
+}
+
+.container12 .prefix5 {
+  padding-left 475px
+}
+
+.container12 .prefix6 {
+  padding-left 570px
+}
+
+.container12 .prefix7 {
+  padding-left 665px
+}
+
+.container12 .prefix8 {
+  padding-left 760px
+}
+
+.container12 .prefix9 {
+  padding-left 855px
+}
+
+.container12 .prefix10 {
+  padding-left 950px
+}
+
+.container12 .prefix11 {
+  padding-left 1045px
+}
+
+/* Suffix Extra Space >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+.container12 .suffix1 {
+  padding-right 95px
+}
+
+.container12 .suffix2 {
+  padding-right 190px
+}
+
+.container12 .suffix3 {
+  padding-right 285px
+}
+
+.container12 .suffix4 {
+  padding-right 380px
+}
+
+.container12 .suffix5 {
+  padding-right 475px
+}
+
+.container12 .suffix6 {
+  padding-right 570px
+}
+
+.container12 .suffix7 {
+  padding-right 665px
+}
+
+.container12 .suffix8 {
+  padding-right 760px
+}
+
+.container12 .suffix9 {
+  padding-right 855px
+}
+
+.container12 .suffix10 {
+  padding-right 950px
+}
+
+.container12 .suffix11 {
+  padding-right 1045px
+}
+
+/* Push Space >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+.container12 .push1 {
+  left 95px
+}
+
+.container12 .push2 {
+  left 190px
+}
+
+.container12 .push3 {
+  left 285px
+}
+
+.container12 .push4 {
+  left 380px
+}
+
+.container12 .push5 {
+  left 475px
+}
+
+.container12 .push6 {
+  left 570px
+}
+
+.container12 .push7 {
+  left 665px
+}
+
+.container12 .push8 {
+  left 760px
+}
+
+.container12 .push9 {
+  left 855px
+}
+
+.container12 .push10 {
+  left 950px
+}
+
+.container12 .push11 {
+  left 1045px
+}
+
+/* Pull Space >> 12 Columns
+----------------------------------------------------------------------------------------------------*/
+.container12 .pull1 {
+  left -95px
+}
+
+.container12 .pull2 {
+  left -190px
+}
+
+.container12 .pull3 {
+  left -285px
+}
+
+.container12 .pull4 {
+  left -380px
+}
+
+.container12 .pull5 {
+  left -475px
+}
+
+.container12 .pull6 {
+  left -570px
+}
+
+.container12 .pull7 {
+  left -665px
+}
+
+.container12 .pull8 {
+  left -760px
+}
+
+.container12 .pull9 {
+  left -855px
+}
+
+.container12 .pull10 {
+  left -950px
+}
+
+.container12 .pull11 {
+  left -1045px
+}
+
+/* `Clear Floated Elements
+----------------------------------------------------------------------------------------------------*/
+
+/* http//sonspring.com/journal/clearing-floats */
+.clear {
+  clear both
+  display block
+  overflow hidden
+  visibility hidden
+  width 0
+  height 0
+}
+
+/* http//www.yuiblog.com/blog/2010/09/27/clearfix-reloaded-overflowhidden-demystified */
+.clearfix:before,
+.clearfix:after {
+  content '\0020'
+  display block
+  overflow hidden
+  visibility hidden
+  width 0
+  height 0
+}
+
+.clearfix:after {
+  clear both
+}
