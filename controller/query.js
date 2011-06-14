@@ -46,11 +46,11 @@ module.exports = function(app) {
           send(err, null)
         }
 
-        function send(err, data){
+        function send(err, data, fields){
           res.send({'err': err, 'data': data, 'query': !query ? null : {
               'sql':      query.sql
             , 'typeCast': query.typeCast
-            , 'fields':   query._fields
+            , 'fields':   fields
             , 'database': db.database
           }})
         }
