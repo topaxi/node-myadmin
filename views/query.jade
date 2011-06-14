@@ -9,7 +9,7 @@ form#query(action='/#{host}/query', method='post')
     a(id='tableList', href='/#{host}/#{database}') Browse tables
 
   div.container12
-    textarea(name='query').grid10.alpha
+    textarea(name='query', spellcheck='false').grid10.alpha
     ul#savedQueries.grid2.omega
       li.clickable Empty query
     label.grid12(title="Insert query paramters, separated by comma. Example: 2,'blubber',3,4") Query parameters: 
