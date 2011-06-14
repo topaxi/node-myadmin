@@ -86,6 +86,7 @@ $('#query').submit(function(e){
 
   hideTextarea()
 
+  $('#results').html('<img src="/pictures/loading.gif" alt="loading...">')
   $.post(this.action, $(this).serialize(), function(data){
     getTPL('query-result', function(tpl){
       data.Field   = Field
