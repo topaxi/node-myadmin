@@ -11,9 +11,9 @@ module.exports = function(err, req, res, next) {
   else {
     var locals = {
         'title':    'node-myadmin'
-      , 'host':     undefined
-      , 'database': undefined
-      , 'table':    undefined
+      , 'host':     null
+      , 'database': null
+      , 'table':    null
       , 'error':    err
       , 'url':      req.originalUrl
     }
