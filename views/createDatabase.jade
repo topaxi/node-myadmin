@@ -1,0 +1,10 @@
+form(action='/#{host}/create', method="post")
+  p: label New database Name: 
+    input(name='name')
+  p: label Collation: 
+    select(name='collation')
+      option
+      - each collation in collations
+        option(value=collation.COLLATION_NAME)= collation.COLLATION_NAME
+
+  p: button Create

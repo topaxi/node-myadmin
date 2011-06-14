@@ -27,11 +27,11 @@ config.hosts = {
   , 'dev.gameswelt': {
       'user':      'root'
     , 'password':  '123qwe'
-    , 'databases': [
-        'gameswelt_forum'
-      , 'gameswelt_forum_fm'
-      , 'gameswelt_portal'
-    ]
+    //, 'databases': [
+    //    'gameswelt_forum'
+    //  , 'gameswelt_forum_fm'
+    //  , 'gameswelt_portal'
+    //]
     , 'host':     '192.168.56.251'
     , 'port':     3306
     , 'typeCast': true
