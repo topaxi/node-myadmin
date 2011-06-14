@@ -1,3 +1,8 @@
+ul.menu
+  li: a(href='/#{host}/#{database}/drop'
+      , onclick='return confirm("You are about to drop the database `#{database}`, are you sure?")')
+      | Drop database
+
 h2 #{tables.length} Tables:
 
 ul#tables

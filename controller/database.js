@@ -1,4 +1,5 @@
 module.exports = function(app) {
+
   app.server.get('/:host/:database', function(req, res, next) {
     var host     = req.params.host
       , database = req.params.database
@@ -18,6 +19,14 @@ module.exports = function(app) {
       locals.database = database
 
       res.render('database', {'locals': locals})
+    })
+  })
+
+  app.server.get('/:host/:database/drop', function(req, res, next) {
+    var query = req.db.query('DROP DATABASE `'+ req.params.database +'`', function(err, data) {
+      if (err) return next(err)
+
+      res.redirect('/'+ req.params.host)
     })
   })
 }
