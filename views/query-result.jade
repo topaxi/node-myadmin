@@ -7,13 +7,13 @@
   - if (data.length)
     table
       tr
-        - each field in query.fields
+        - each field, name in query.fields
           - if(field.flags & Field.PRI_KEY_FLAG)
-            th.pri= field.name
+            th.pri= name
           - else if(field.flags & Field.UNIQUE_KEY_FLAG)
-            th.uni= field.name
+            th.uni= name
           - else
-            th= field.name
+            th= name
 
       - each row in data
         tr(data-keys=rowLink(query, row))
@@ -22,9 +22,9 @@
             - if (row[i] === null)
               td.null NULL
             - else
-              - if(query.fields[field].flags & Field.PRI_KEY_FLAG)
+              - if(query.fields[i].flags & Field.PRI_KEY_FLAG)
                 td.pri= row[i]
-              - else if(query.fields[field].flags & Field.UNIQUE_KEY_FLAG)
+              - else if(query.fields[i].flags & Field.UNIQUE_KEY_FLAG)
                 td.uni= row[i]
               - else
                 td= row[i]
