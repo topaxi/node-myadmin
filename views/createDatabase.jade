@@ -4,7 +4,10 @@ form(action='/#{host}/create', method="post")
   p: label Collation: 
     select(name='collation')
       option
-      - each collation in collations
-        option(value=collation.COLLATION_NAME)= collation.COLLATION_NAME
+      - each charset in charsets
+        optgroup(label=charset[0].CHARACTER_SET_NAME, title=charset[0].DESCRIPTION)
+
+        - each collation in charset
+          option(value=collation.COLLATION_NAME)= collation.COLLATION_NAME
 
   p: button Create

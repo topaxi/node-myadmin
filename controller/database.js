@@ -15,7 +15,18 @@ module.exports = function(app) {
                          +', `c`.`COLLATION_NAME` ASC', function(err, data) {
         if (err) return next(err)
 
-        locals.collations = data
+        var c = {}
+          , row
+
+        for (var i = 0; i < data.length; ++i) {
+          row = data[i]
+
+          if (!c[row.CHARACTER_SET_NAME]) c[row.CHARACTER_SET_NAME] = []
+
+          c[row.CHARACTER_SET_NAME].push(row)
+        }
+
+        locals.charsets = c
 
         res.render('createDatabase', {'locals': locals})
       })
