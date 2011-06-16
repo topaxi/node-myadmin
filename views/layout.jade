@@ -31,9 +31,11 @@ html(lang='en')
                 li: a(href='/#{host}/query/#{database}/#{table}') query
               - else
                 li: a(href='/#{host}/query/#{database}') query
+
+              li: a(href='/#{host}/#{database}/processlist') processlist
             - else
               li: a(href='/#{host}/query') query
-            li: a(href='/#{host}/#{database}/processlist') processlist
+              li: a(href='/#{host}/processlist') processlist
 
     #content!= body
     #footer
