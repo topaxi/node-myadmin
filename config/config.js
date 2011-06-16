@@ -37,4 +37,9 @@ config.hosts = {
     , 'typeCast': true
     , 'debug':    false
   }
+  , 'unreachable': {
+      'user':     'aaah'
+    , 'password': 'blubb'
+    , 'host':     '10.0.0.1'
+  }
 }

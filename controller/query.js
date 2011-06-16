@@ -24,37 +24,41 @@ module.exports = function(app) {
   })
 
   app.server.post('/:host/query', function(req, res) {
-    var parameters = JSON.parse('['+ req.body.parameters.trim() +']')
+    var parameters = req.body.parameters || ''
+      , query
 
-    app.utils.getDB(req.params.host, function(err, db) {
-      db.database = req.body.database
+    parameters = JSON.parse('['+ parameters.trim() +']')
 
-      app.utils.useDatabase(db, function(err) {
-        if (err) {
-          send(err, null)
+    if (~req.body.query.indexOf('?')) parameters = []
 
-          return
-        }
+    if (req.body.database) {
+      req.db.database = req.body.database
 
-        try {
-          if (req.body.query.indexOf('?') < 0) parameters = []
+      app.utils.useDatabase(req.db, sendQuery)
+    }
+    else {
+      sendQuery()
+    }
 
-          // db.query is async, parameter errors can (and should) be catched!
-          var query = db.query(req.body.query, parameters, send)
-        }
-        catch (err) {
-          send(err, null)
-        }
+    function sendQuery(err) {
+      if (err) return send(err, null)
 
-        function send(err, data, fields){
-          res.send({'err': err, 'data': data, 'query': !query ? null : {
-              'sql':      query.sql
-            , 'typeCast': query.typeCast
-            , 'fields':   fields
-            , 'database': db.database
-          }})
-        }
-      })
-    })
+      try {
+        // db.query is async, parameter errors can (and should) be catched!
+        query = req.db.query(req.body.query, parameters, send)
+      }
+      catch (err) {
+        send(err, null)
+      }
+    }
+
+    function send(err, data, fields){
+      res.send({'err': err, 'data': data, 'query': !query ? null : {
+          'sql':      query.sql
+        , 'typeCast': query.typeCast
+        , 'fields':   fields
+        , 'database': req.db.database
+      }})
+    }
   })
 }

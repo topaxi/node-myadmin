@@ -3,6 +3,10 @@ html(lang='en')
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    script
+      var NodeMyadmin = {'host':     '#{host}'
+                        ,'database': '#{database}'
+                        }
   body.container12
     #header
       h1
@@ -22,14 +26,14 @@ html(lang='en')
 
       ul.menu
         - if(host)
-          li
             - if (database)
               - if (table)
-                a(href='/#{host}/query/#{database}/#{table}') query
+                li: a(href='/#{host}/query/#{database}/#{table}') query
               - else
-                a(href='/#{host}/query/#{database}') query
+                li: a(href='/#{host}/query/#{database}') query
             - else
-              a(href='/#{host}/query') query
+              li: a(href='/#{host}/query') query
+            li: a(href='/#{host}/#{database}/processlist') processlist
 
     #content!= body
     #footer

@@ -2,10 +2,7 @@ module.exports = function(app) {
   app.server.get('/:host', function(req, res, next) {
     var host   = req.params.host
       , hosts  = app.config.hosts
-      , locals = {
-          'title':   'node-myadmin:'+ host
-        , 'content': 'Databases:'
-      }
+      , locals = {'title': 'node-myadmin:'+ host}
 
     req.db.query('show databases', function(err, result) {
       if (err) next(err)

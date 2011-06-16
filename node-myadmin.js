@@ -70,6 +70,20 @@ server.configure(function() {
 
     utils.useDatabase(req.db, next)
   })
+
+  // Close connection after each request
+  server.use(function(req, res, next) {
+    var end = res.end
+
+    res.end = function(data, encoding) {
+      if (req.db) req.db.end()
+
+      res.end = end
+      res.end(data, encoding)
+    }
+
+    next()
+  })
 })
 
 // Controller to load jade templates to client
@@ -78,6 +92,7 @@ loadController('template')
 loadController('index')
 loadController('query')
 loadController('host')
+loadController('processlist')
 loadController('database')
 loadController('table')
 
