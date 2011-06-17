@@ -41,7 +41,7 @@ module.exports = function(app) {
     var query = req.db.query('create database `'+ database +'` DEFAULT CHARACTER SET '+ charset +' COLLATE '+ collation, function(err, data) {
       if (err) return next(err)
 
-      res.redirect('/'+ req.params.host)
+      res.redirect('/'+ req.params.host +'/'+ database)
     })
   })
 
