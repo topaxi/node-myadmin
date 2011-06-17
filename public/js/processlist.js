@@ -18,4 +18,8 @@ var timeout = 2000
   })
 })()
 
+$('#fullprocesslist').click(function(){
+  options.query = this.checked ? 'show full processlist' : 'show processlist'
+})
+
 })
