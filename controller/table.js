@@ -1,5 +1,40 @@
 module.exports = function(app) {
 
+  app.server.get('/:host/:database/create', function(req, res, next) {
+    var locals = {
+        'title': 'node-myadmin:'+ req.params.host +'/'+ req.params.database +'/create'
+    }
+
+    app.utils.getCharsets(req.db, function(err, data) {
+      if (err) return next(err)
+
+      locals.charsets = data
+
+      app.utils.getEngines(req.db, function(err, data) {
+        if (err) return next(err)
+
+        locals.engines = data
+
+        res.render('createTable', {'locals': locals})
+      })
+    })
+  })
+
+  app.server.post('/:host/:database/create', function(req, res, next) {
+    var table     = req.body.name
+      , options = {'table':     table
+                  ,'collation': req.body.collation
+                  ,'engine':    req.body.engine
+                  ,'fields':    req.body.fields
+                  }
+
+    app.utils.createTable(req.db, options, function(err) {
+      if (err) return next(err)
+
+      res.redirect('/'+ req.params.host +'/'+ req.params.database +'/'+ table)
+    })
+  })
+
   app.server.get('/:host/:database/:table', function(req, res, next) {
     var host     = req.params.host
       , table    = req.params.table

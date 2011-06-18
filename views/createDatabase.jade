@@ -1,7 +1,8 @@
 form(action='/#{host}/create', method="post")
-  p: label New database Name: 
+  p: label New database name: 
     input(name='name')
-  p: label Collation: 
+
+  p: label Default collation: 
     select(name='collation')
       option
       - each charset in charsets

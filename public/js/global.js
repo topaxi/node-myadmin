@@ -1,5 +1,7 @@
 ;(function(window, undefined){
 
+var $ = window.jQuery
+
 NodeMyadmin.Field = {
     NOT_NULL_FLAG:            1
   , PRI_KEY_FLAG:             2
@@ -22,6 +24,7 @@ NodeMyadmin.Field = {
 ;(function(){
   var templates = {}
 
+  NodeMyadmin.getTPL = getTPL
   function getTPL(tpl, callback){
     if(templates[tpl]) return void callback(templates[tpl])
 
@@ -36,7 +39,6 @@ NodeMyadmin.Field = {
       callback(templates[tpl] = (new Function('return '+ data))())
     }, 'text')
   }
-  NodeMyadmin.getTPL = getTPL
 })()
 
 })(window)
