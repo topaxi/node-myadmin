@@ -1,0 +1,28 @@
+- scripts.push('/js/createTable.js')
+
+form(action='/#{host}/#{database}/create', method="post")
+  p: label New table name: 
+    input(name='name')
+
+  P: label Storage engine:
+    select(name='engine')
+      option
+      - each engine in engines
+        - if (~['YES', 'DEFAULT'].indexOf(engine.Support))
+          option(title=engine.Comment)= engine.Engine
+
+  p: label Default collation: 
+    select(name='collation')
+      option
+      - each charset in charsets
+        optgroup(label=charset[0].CHARACTER_SET_NAME, title=charset[0].DESCRIPTION)
+
+        - each collation in charset
+          option(value=collation.COLLATION_NAME)= collation.COLLATION_NAME
+
+  p Fields:
+  div.fields
+    div.field!= partial('field')
+
+  p: button.addField Add new field
+  p: button Create

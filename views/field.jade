@@ -1,0 +1,60 @@
+- var types = {'numeric': ['TINYINT', 'SMALLINT', 'MEDIUMINT', 'INT', 'BIGINT', 'FLOAT', 'DOUBLE', 'DECIMAL', 'NUMERIC', 'BIT'], 'time': ['DATE', 'DATETIME', 'TIMESTAMP', 'TIME', 'YEAR'], 'string': ['CHAR', 'VARCHAR', 'BINARY', 'VARBINARY', 'BLOB', 'TEXT', 'ENUM', 'SET']}
+- if (typeof i    === 'undefined') i    = 0
+
+p.name: label Name:
+  input(name='fields[#{i}][name]', required)
+
+p.type: label Type:
+  select(name='fields[#{i}][type]')
+    - each type, name in types
+      optgroup(label=name)
+
+      - each t in type
+        option= t
+
+p.default: label Default:
+  select(name='fields[#{i}][default]')
+    option
+    //- Maybe as a checkbox instead?
+    option NULL
+    //- if(type === 'time')
+    option NOW
+    //- Fix the options above to replace this with an input field
+    option User defined
+
+p.collation: label Collation:
+  select(name='fields[#{i}][collation]')
+    option
+    - each charset in charsets
+      optgroup(label=charset[0].CHARACTER_SET_NAME, title=charset[0].DESCRIPTION)
+
+      - each collation in charset
+        option(value=collation.COLLATION_NAME)= collation.COLLATION_NAME
+
+p.attributes: label Attributes:
+  select(name='fields[#{i}][attributes]')
+    option
+    option Binary
+    option Unsigned
+    option Unsigned zerofill
+    //- if(type === 'time')
+      option onupdate NOW()
+
+p.null: label NULL:
+  input(name='fields[#{i}][null]', type='checkbox')
+
+p.index: label Index:
+  select(name='fields[#{i}][index]')
+    option
+    option PRIMARY
+    option UNIQUE
+    option INDEX
+    //- Possible on InnoDB? If not, do not show!
+    //- if(type === 'string')
+    option FULLTEXT
+
+p.auto_increment: label Auto increment:
+  input(name='fields[#{i}][auto_increment]', type='checkbox')
+
+p.comment: label Comment:
+  textarea(name='fields[#{i}][comment]')
