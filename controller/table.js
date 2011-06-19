@@ -28,7 +28,7 @@ module.exports = function(app) {
                   ,'fields':    req.body.fields
                   }
 
-    app.utils.createTable(req.db, options, function(err) {
+    var query = app.utils.createTable(req.db, options, function(err) {
       if (err) return next(err)
 
       res.redirect('/'+ req.params.host +'/'+ req.params.database +'/'+ table)

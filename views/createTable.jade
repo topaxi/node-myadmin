@@ -20,7 +20,7 @@ form(action='/#{host}/#{database}/create', method="post")
         - each collation in charset
           option(value=collation.COLLATION_NAME)= collation.COLLATION_NAME
 
-  p Fields:
+  p: b Fields:
   div.fields
     div.field!= partial('field')
 

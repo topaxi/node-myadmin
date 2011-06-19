@@ -1,5 +1,5 @@
 - var types = {'numeric': ['TINYINT', 'SMALLINT', 'MEDIUMINT', 'INT', 'BIGINT', 'FLOAT', 'DOUBLE', 'DECIMAL', 'NUMERIC', 'BIT'], 'time': ['DATE', 'DATETIME', 'TIMESTAMP', 'TIME', 'YEAR'], 'string': ['CHAR', 'VARCHAR', 'BINARY', 'VARBINARY', 'BLOB', 'TEXT', 'ENUM', 'SET']}
-- if (typeof i    === 'undefined') i    = 0
+- if (typeof i === 'undefined') var i = 0
 
 p.name: label Name:
   input(name='fields[#{i}][name]', required)
@@ -12,8 +12,13 @@ p.type: label Type:
       - each t in type
         option= t
 
+p.type: label Length / Values:
+  input(name='fields[#{i}][length]')
+
 p.default: label Default:
-  select(name='fields[#{i}][default]')
+  input(name='fields[#{i}][default]')
+
+  //-select(name='fields[#{i}][default]')
     option
     //- Maybe as a checkbox instead?
     option NULL
@@ -38,7 +43,7 @@ p.attributes: label Attributes:
     option Unsigned
     option Unsigned zerofill
     //- if(type === 'time')
-      option onupdate NOW()
+    option on update CURRENT_TIMESTAMP
 
 p.null: label NULL:
   input(name='fields[#{i}][null]', type='checkbox')
@@ -56,5 +61,5 @@ p.index: label Index:
 p.auto_increment: label Auto increment:
   input(name='fields[#{i}][auto_increment]', type='checkbox')
 
-p.comment: label Comment:
+p.comment.clearfix: label Comment:
   textarea(name='fields[#{i}][comment]')

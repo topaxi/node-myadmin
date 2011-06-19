@@ -20,7 +20,7 @@ $('.addField').click(function(e) {
 
   NodeMyadmin.getTPL('field', function(tpl){
     NodeMyadmin.getCharsets(function(charsets) {
-      $('.fields').append($('<div class="field">').html(
+      $('.fields').append('<hr>').append($('<div class="field">').html(
         tpl({fields:NodeMyadmin.Field
             ,i:$('div.field').length
             ,charsets:charsets
