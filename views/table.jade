@@ -21,7 +21,7 @@ table#fields
       td= field.Type
       td= field.Null
       td= field.Key
-      - if (field.Default === null)
+      - if (field.Null === 'YES' && field.Default === null)
         td.null NULL
       - else
         td= field.Default
