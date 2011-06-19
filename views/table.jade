@@ -8,18 +8,21 @@ ul.menu
 
 table#fields
   tr
-    th.field Field
-    th.type Type
-    th.null Null
-    th.key Key
-    th.default Default
-    th.extra Extra
+    th Field
+    th Type
+    th Null
+    th Key
+    th Default
+    th Extra
 
   - each field in fields
     tr(class=field.Key.toLowerCase())
-      td.field= field.Field
-      td.type= field.Type
-      td.null: input(type='checkbox', checked=field.Null === 'YES', disabled)
-      td.key= field.Key
-      td.default= field.Default
-      td.extra= field.Extra
+      td= field.Field
+      td= field.Type
+      td= field.Null
+      td= field.Key
+      - if (field.Default === null)
+        td.null NULL
+      - else
+        td= field.Default
+      td= field.Extra
