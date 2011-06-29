@@ -1,3 +1,4 @@
+- if (typeof truncate === 'undefined') truncate = NodeMyadmin.truncate
 - if (err)
   div.error
     p.message= err.message
@@ -17,17 +18,18 @@
 
       - each row in data
         tr(data-keys=rowLink(query, row))
-          - var field = 0
+          - var field = 0, value
           - for (var i in row) {
-            - if (row[i] === null)
+            - value = row[i]
+            - if (value === null)
               td.null NULL
             - else
               - if(query.fields[i].flags & Field.PRI_KEY_FLAG)
-                td.pri= row[i]
+                td.pri(title=value)= truncate(value, 200)
               - else if(query.fields[i].flags & Field.UNIQUE_KEY_FLAG)
-                td.uni= row[i]
+                td.uni(title=value)= truncate(value, 200)
               - else
-                td= row[i]
+                td(title=value)= truncate(value, 200)
 
           - field++
           - }

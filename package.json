@@ -1,7 +1,7 @@
 { "name": "node-myadmin"
 , "description": "MySQL Admin Interface written for node"
 , "version": "0.0.1"
-, "keywords": ["mysql", "sql"]
+, "keywords": [ "mysql", "sql" ]
 , "author": "Damian Senn <damian.senn@gmail.com>"
 , "repository": "git://github.com/topaxi/node-myadmin"
 , "bin": { "node-myadmin": "./node-myadmin" }
@@ -10,7 +10,7 @@
     , "mysql": ">= 0.9.1"
     , "stylus": ">= 0.13.0"
     , "express": ">= 2.3.10"
-, }
+  }
 , "scripts" : { "prepublish" : "npm prune" }
 , "engines": { "node": ">= 0.4.1" }
 }

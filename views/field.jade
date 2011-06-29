@@ -1,10 +1,10 @@
 - var types = {'numeric': ['TINYINT', 'SMALLINT', 'MEDIUMINT', 'INT', 'BIGINT', 'FLOAT', 'DOUBLE', 'DECIMAL', 'NUMERIC', 'BIT'], 'time': ['DATE', 'DATETIME', 'TIMESTAMP', 'TIME', 'YEAR'], 'string': ['CHAR', 'VARCHAR', 'BINARY', 'VARBINARY', 'BLOB', 'TEXT', 'ENUM', 'SET']}
 - if (typeof i === 'undefined') var i = 0
 
-p.name: label Name:
+p.name.clearfix: label Name:
   input(name='fields[#{i}][name]', required)
 
-p.type: label Type:
+p.type.clearfix: label Type:
   select(name='fields[#{i}][type]')
     - each type, name in types
       optgroup(label=name)
@@ -12,10 +12,10 @@ p.type: label Type:
       - each t in type
         option= t
 
-p.type: label Length / Values:
+p.type.clearfix: label Length / Values:
   input(name='fields[#{i}][length]')
 
-p.default: label Default:
+p.default.clearfix: label Default:
   input(name='fields[#{i}][default]')
 
   //-select(name='fields[#{i}][default]')
@@ -27,7 +27,7 @@ p.default: label Default:
     //- Fix the options above to replace this with an input field
     option User defined
 
-p.collation: label Collation:
+p.collation.clearfix: label Collation:
   select(name='fields[#{i}][collation]')
     option
     - each charset in charsets
@@ -36,7 +36,7 @@ p.collation: label Collation:
       - each collation in charset
         option(value=collation.COLLATION_NAME)= collation.COLLATION_NAME
 
-p.attributes: label Attributes:
+p.attributes.clearfix: label Attributes:
   select(name='fields[#{i}][attributes]')
     option
     option Binary
@@ -45,10 +45,10 @@ p.attributes: label Attributes:
     //- if(type === 'time')
     option on update CURRENT_TIMESTAMP
 
-p.null: label NULL:
+p.null.clearfix: label NULL:
   input(name='fields[#{i}][null]', type='checkbox')
 
-p.index: label Index:
+p.index.clearfix: label Index:
   select(name='fields[#{i}][index]')
     option
     option PRIMARY
@@ -58,7 +58,7 @@ p.index: label Index:
     //- if(type === 'string')
     option FULLTEXT
 
-p.auto_increment: label Auto increment:
+p.auto_increment.clearfix: label Auto increment:
   input(name='fields[#{i}][auto_increment]', type='checkbox')
 
 p.comment.clearfix: label Comment:

@@ -1,7 +1,17 @@
 - scripts.push('/js/processlist.js')
 
-label
-  input#fullprocesslist(type='checkbox')
-  |  Full processlist
+:stylus
+  td:last-child
+    width 100%
 
+div
+  label Interval: 
+    input#interval(value=2)
+
+div
+  label
+    input#fullprocesslist(type='checkbox')
+    |  Full processlist
+
+#status
 #results.grid12

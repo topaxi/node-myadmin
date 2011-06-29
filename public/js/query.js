@@ -135,4 +135,11 @@ if(localStorage && JSON){
 }
 else $('#savedQueries').hide()
 
+$('#results').delegate('td', 'click', function(e) {
+  if (this.title.length && this.title.length !== this.textContent.length) {
+    this.textContent = this.title
+    this.title = ''
+  }
+})
+
 })
