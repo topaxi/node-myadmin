@@ -47,6 +47,41 @@ Good:
       bar()
     }
 
+## Cuddling braces
+
+Do not cuddle braces.
+
+Bad:
+
+    if (foo) {
+      try {
+        bar()
+      } catch (e) {
+        return new Error('Oh noes!')
+      } finally {
+        foo.end()
+      }
+    } else {
+      baz()
+    }
+
+Good:
+
+    if (foo) {
+      try {
+        bar()
+      }
+      catch (e) {
+        return new Error('Oh noes!')
+      }
+      finally {
+        foo.end()
+      }
+    }
+    else {
+      baz()
+    }
+
 ## Semicolons
 
 Don't use them except in four situations:
