@@ -57,13 +57,15 @@ Bad:
       try {
         bar()
       } catch (e) {
-        return new Error('Oh noes!')
+        return false
       } finally {
         foo.end()
       }
     } else {
       baz()
     }
+
+    return true
 
 Good:
 
@@ -72,7 +74,7 @@ Good:
         bar()
       }
       catch (e) {
-        return new Error('Oh noes!')
+        return false
       }
       finally {
         foo.end()
@@ -81,6 +83,8 @@ Good:
     else {
       baz()
     }
+
+    return true
 
 ## Semicolons
 
