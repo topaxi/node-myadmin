@@ -49,7 +49,7 @@ Good:
 
 ## Cuddling braces
 
-Do not cuddle braces.
+Do not cuddle braces. It helps to show where each block starts or ends.
 
 Bad:
 
